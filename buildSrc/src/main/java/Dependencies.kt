@@ -12,6 +12,8 @@ object Versions {
     const val composeVm = "2.4.1"
     const val activityCompose = "1.4.0"
     const val material = "1.5.0"
+    const val paging = "3.1.1"
+    const val pagingCompose = "1.0.0-alpha14"
 
     const val coroutines = "1.4.0"
 
@@ -50,6 +52,7 @@ object Deps {
     val coil = CoilDeps
     val quality = QualityDeps
     val test = TestDeps
+    val paging = PagingDeps
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
 }
 
@@ -95,6 +98,12 @@ object RetrofitDeps {
 object CoilDeps {
     const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
     const val gif = "io.coil-kt:coil-gif:${Versions.coil}"
+}
+
+object PagingDeps {
+    const val runtime = "androidx.paging:paging-runtime:${Versions.paging}"
+    const val common = "androidx.paging:paging-common:${Versions.paging}"
+    const val compose = "androidx.paging:paging-compose:${Versions.pagingCompose}"
 }
 
 object TestDeps {

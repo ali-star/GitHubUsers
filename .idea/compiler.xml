@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="GitHubUsers.app" target="11" />
+      <module name="GitHubUsers.buildSrc" target="11" />
+      <module name="GitHubUsers.libraries.core" target="11" />
+      <module name="GitHubUsers.libraries.test" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
