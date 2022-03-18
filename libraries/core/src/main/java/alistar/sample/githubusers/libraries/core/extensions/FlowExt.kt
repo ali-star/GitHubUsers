@@ -1,6 +1,6 @@
-package alistar.sample.githubusers.core.extensions
+package alistar.sample.githubusers.libraries.core.extensions
 
-import alistar.sample.githubusers.core.BuildConfig
+import alistar.sample.githubusers.libraries.core.BuildConfig
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.catch
