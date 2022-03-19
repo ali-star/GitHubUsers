@@ -1,7 +1,7 @@
-package alistar.sample.data.repository.mapper
+package alistar.sample.githubusers.data.remote.mapper
 
 import alistar.sample.data.repository.model.RepoUser
-import alistar.sample.githubusers.domain.model.User
+import alistar.sample.githubusers.data.remote.entity.UserEntity
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.dsl.AND
 import alistar.sample.githubusers.libraries.test.dsl.GIVEN
@@ -11,7 +11,7 @@ import alistar.sample.githubusers.libraries.test.dsl.WHEN
 import junit.framework.TestCase
 import org.junit.Test
 
-class UserMapperTest : TestCase() {
+class UserEntityMapperTest : TestCase() {
 
     private val robot = Robot()
 
@@ -25,9 +25,10 @@ class UserMapperTest : TestCase() {
                 )
             }
             AND {
-                user = User(
-                    username = "ali-star",
-                    photoUrl = "photoUrl"
+                userEntity = UserEntity(
+                    login = "ali-star",
+                    avatar = "photoUrl",
+                    gravatar = ""
                 )
             }
             WHEN { mapToDomain() }
@@ -38,16 +39,16 @@ class UserMapperTest : TestCase() {
     private class Robot : BaseRobot() {
 
         lateinit var repoUser: RepoUser
-        lateinit var user: User
-        private lateinit var mappedUser: User
+        lateinit var userEntity: UserEntity
+        private lateinit var mappedUser: RepoUser
 
         fun mapToDomain() {
-            mappedUser = repoUser.toDomain()
+            mappedUser = userEntity.toRepo()
         }
 
         fun checkRepoUserMappedToUser() {
-            assertEquals(user.username, repoUser.username)
-            assertEquals(user.photoUrl, repoUser.photoUrl)
+            assertEquals(userEntity.login, repoUser.username)
+            assertEquals(userEntity.avatar, repoUser.photoUrl)
         }
     }
 }

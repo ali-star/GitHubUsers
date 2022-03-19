@@ -23,10 +23,10 @@ class GitHubRepositoryImpl(
 
     private val ioDispatcher = Dispatchers.IO
 
-    override fun getUsersPagingSource(): Flow<PagingData<User>> =
+    override fun searchUsers(query: String): Flow<PagingData<User>> =
         Pager(
             config = PagingConfig(pageSize = 30),
-            pagingSourceFactory = { gitHubDataSource.getUsersPagingSource() }
+            pagingSourceFactory = { gitHubDataSource.searchUsers(query) }
         ).flow.map { data -> data.map { it.toDomain() } }
 
     override fun getUserDetail(username: String): Flow<Result<UserDetail>> = flow {

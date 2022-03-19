@@ -10,5 +10,5 @@ class GetUsersPagingSourceUseCase @Inject constructor(
     private val gitHubRepository: GitHubRepository
 ) {
 
-    operator fun invoke(): Flow<PagingData<User>> = gitHubRepository.getUsersPagingSource()
+    operator fun invoke(query: String): Flow<PagingData<User>> = gitHubRepository.searchUsers(query)
 }

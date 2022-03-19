@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="1.8">
       <module name="GitHubUsers.app" target="11" />
       <module name="GitHubUsers.buildSrc" target="11" />
+      <module name="GitHubUsers.data.remote" target="11" />
       <module name="GitHubUsers.data.repository" target="11" />
       <module name="GitHubUsers.libraries.core" target="11" />
       <module name="GitHubUsers.libraries.test" target="11" />

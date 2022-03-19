@@ -51,6 +51,7 @@ class GitHubRepositoryImplTest : TestCase() {
             coEvery { gitHubDataSource.getUserDetail(any()) } answers {
                 RepoUserDetail(
                     username = "ali-star",
+                    name = "Ali Mohseni Rad",
                     photoUrl = "photoUrl",
                     followersCount = 10,
                     followingCount = 10,

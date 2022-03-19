@@ -1,7 +1,7 @@
-package alistar.sample.data.repository.mapper
+package alistar.sample.githubusers.data.remote.mapper
 
 import alistar.sample.data.repository.model.RepoUserDetail
-import alistar.sample.githubusers.domain.model.UserDetail
+import alistar.sample.githubusers.data.remote.entity.UserDetailEntity
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.dsl.AND
 import alistar.sample.githubusers.libraries.test.dsl.GIVEN
@@ -11,7 +11,7 @@ import alistar.sample.githubusers.libraries.test.dsl.WHEN
 import junit.framework.TestCase
 import org.junit.Test
 
-class UserDetailMapperTest : TestCase() {
+class UserDetailEntityMapperTest : TestCase() {
 
     private val robot = Robot()
 
@@ -32,16 +32,17 @@ class UserDetailMapperTest : TestCase() {
                 )
             }
             AND {
-                userDetail = UserDetail(
-                    username = "ali-star",
+                userDetailEntity = UserDetailEntity(
+                    login = "ali-star",
                     name = "Ali Mohseni Rad",
-                    photoUrl = "photoUrl",
-                    followingCount = 10,
-                    followersCount = 15,
-                    organizations = "organization",
+                    avatar = "photoUrl",
+                    gravatar = "",
+                    following = 10,
+                    followers = 15,
+                    company = "organization",
                     location = "Amsterdam, Netherlands",
                     twitterUsername = "@ali-star",
-                    blogUrl = "alimohsenirad.ir"
+                    blog = "alimohsenirad.ir"
                 )
             }
             WHEN { mapToDomain() }
@@ -52,23 +53,23 @@ class UserDetailMapperTest : TestCase() {
     private class Robot : BaseRobot() {
 
         lateinit var repoUserDetail: RepoUserDetail
-        lateinit var userDetail: UserDetail
-        private lateinit var mappedUserDetail: UserDetail
+        lateinit var userDetailEntity: UserDetailEntity
+        private lateinit var mappedUserDetail: RepoUserDetail
 
         fun mapToDomain() {
-            mappedUserDetail = repoUserDetail.toDomain()
+            mappedUserDetail = userDetailEntity.toRepo()
         }
 
         fun checkRepoUserDetailMappedSuccessfully() {
-            assertEquals(repoUserDetail.username, mappedUserDetail.username)
-            assertEquals(repoUserDetail.name, mappedUserDetail.name)
-            assertEquals(repoUserDetail.photoUrl, mappedUserDetail.photoUrl)
-            assertEquals(repoUserDetail.followingCount, mappedUserDetail.followingCount)
-            assertEquals(repoUserDetail.followersCount, mappedUserDetail.followersCount)
-            assertEquals(repoUserDetail.organizations, mappedUserDetail.organizations)
-            assertEquals(repoUserDetail.location, mappedUserDetail.location)
-            assertEquals(repoUserDetail.twitterUsername, mappedUserDetail.twitterUsername)
-            assertEquals(repoUserDetail.blogUrl, mappedUserDetail.blogUrl)
+            assertEquals(userDetailEntity.login, mappedUserDetail.username)
+            assertEquals(userDetailEntity.name, mappedUserDetail.name)
+            assertEquals(userDetailEntity.avatar, mappedUserDetail.photoUrl)
+            assertEquals(userDetailEntity.following, mappedUserDetail.followingCount)
+            assertEquals(userDetailEntity.followers, mappedUserDetail.followersCount)
+            assertEquals(userDetailEntity.company, mappedUserDetail.organizations)
+            assertEquals(userDetailEntity.location, mappedUserDetail.location)
+            assertEquals(userDetailEntity.twitterUsername, mappedUserDetail.twitterUsername)
+            assertEquals(userDetailEntity.blog, mappedUserDetail.blogUrl)
         }
     }
 }

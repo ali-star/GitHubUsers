@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface GitHubRepository {
 
-    fun getUsersPagingSource(): Flow<PagingData<User>>
+    fun searchUsers(query: String): Flow<PagingData<User>>
 
     fun getUserDetail(username: String): Flow<Result<UserDetail>>
 }

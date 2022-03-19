@@ -6,7 +6,7 @@ import androidx.paging.PagingSource
 
 interface GitHubDataSource {
 
-    fun getUsersPagingSource(): PagingSource<Int, RepoUser>
+    fun searchUsers(query: String): PagingSource<Int, RepoUser>
 
     suspend fun getUserDetail(username: String): RepoUserDetail
 }
