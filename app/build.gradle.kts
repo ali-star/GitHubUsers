@@ -46,8 +46,12 @@ android {
 }
 
 dependencies {
+    implementation(projects.domain)
     implementation(projects.libraries.design)
     implementation(projects.libraries.navigation)
+    implementation(projects.features.search)
+    implementation(projects.data.repository)
+    implementation(projects.data.remote)
     implementation(Deps.android.ktx)
     implementation(Deps.android.lifecycle)
     implementation(Deps.android.activityCompose)

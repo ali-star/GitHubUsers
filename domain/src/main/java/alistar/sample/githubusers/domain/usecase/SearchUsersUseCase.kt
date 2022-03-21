@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetUsersPagingSourceUseCase @Inject constructor(
+class SearchUsersUseCase @Inject constructor(
     private val gitHubRepository: GitHubRepository
 ) {
 
