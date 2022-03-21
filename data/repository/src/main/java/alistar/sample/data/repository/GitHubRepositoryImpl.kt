@@ -25,7 +25,7 @@ class GitHubRepositoryImpl(
 
     override fun searchUsers(query: String): Flow<PagingData<User>> =
         Pager(
-            config = PagingConfig(pageSize = 30),
+            config = PagingConfig(pageSize = 30, initialLoadSize = 30),
             pagingSourceFactory = { gitHubDataSource.searchUsers(query) }
         ).flow.map { data -> data.map { it.toDomain() } }
 

@@ -33,7 +33,13 @@ class UsersPagingSource(
             val users = response.items.map {
                 it.toRepo()
             }
-            val nextKey = (page + 1).let { if (it == params.key) null else it }
+            val nextKey = (page + 1).let {
+                if (users.size < params.loadSize || it == params.key) {
+                    null
+                } else {
+                    it
+                }
+            }
             val prevKey = if (page == STARTING_PAGE_INDEX) null else page
             LoadResult.Page(users, prevKey = prevKey, nextKey = nextKey)
         } catch (exception: IOException) {

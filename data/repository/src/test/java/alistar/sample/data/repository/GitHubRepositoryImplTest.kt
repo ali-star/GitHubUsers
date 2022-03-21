@@ -9,6 +9,7 @@ import alistar.sample.githubusers.libraries.test.dsl.GIVEN
 import alistar.sample.githubusers.libraries.test.dsl.RUN_UNIT_TEST
 import alistar.sample.githubusers.libraries.test.dsl.THEN
 import alistar.sample.githubusers.libraries.test.dsl.WHEN
+import alistar.sample.githubusers.libraries.test.exception.TestException
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase
@@ -64,7 +65,7 @@ class GitHubRepositoryImplTest : TestCase() {
         }
 
         fun mockFailureGetUserDetail() {
-            coEvery { gitHubDataSource.getUserDetail(any()) } throws (Exception("Test exception"))
+            coEvery { gitHubDataSource.getUserDetail(any()) } throws TestException
         }
 
         fun callGetUserDetail() = runBlocking {

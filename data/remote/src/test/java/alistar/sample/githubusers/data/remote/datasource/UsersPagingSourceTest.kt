@@ -63,7 +63,7 @@ class UsersPagingSourceTest : TestCase() {
                 }
             }
             THEN { checkLoadResultIsAPage(loadResult!!) }
-            AND { checkPage1Result((loadResult as PagingSource.LoadResult.Page<Int, RepoUser>)) }
+            AND { checkPage1Result(loadResult as PagingSource.LoadResult.Page<Int, RepoUser>) }
         }
     }
 
@@ -84,7 +84,7 @@ class UsersPagingSourceTest : TestCase() {
                 }
             }
             THEN { checkLoadResultIsAPage(loadResult!!) }
-            AND { checkPage2Result((loadResult as PagingSource.LoadResult.Page<Int, RepoUser>)) }
+            AND { checkPage2Result(loadResult as PagingSource.LoadResult.Page<Int, RepoUser>) }
         }
     }
 
@@ -105,7 +105,7 @@ class UsersPagingSourceTest : TestCase() {
                 }
             }
             THEN { checkLoadResultIsAPage(loadResult!!) }
-            AND { checkPage3Result((loadResult as PagingSource.LoadResult.Page<Int, RepoUser>)) }
+            AND { checkPage3Result(loadResult as PagingSource.LoadResult.Page<Int, RepoUser>) }
         }
     }
 

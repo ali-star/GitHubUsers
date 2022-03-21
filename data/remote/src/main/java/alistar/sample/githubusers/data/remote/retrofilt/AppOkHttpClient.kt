@@ -1,6 +1,6 @@
 package alistar.sample.githubusers.data.remote.retrofilt
 
-import alistar.sample.data.repository.BuildConfig
+import alistar.sample.githubusers.data.remote.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -16,6 +16,8 @@ class AppOkHttpClient {
                 }
             )
         }
+
+        clientBuilder.addInterceptor(BasicAuthInterceptor(BuildConfig.USERNAME, BuildConfig.TOKEN))
 
         return clientBuilder.build()
     }
