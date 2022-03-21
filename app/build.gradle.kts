@@ -47,6 +47,7 @@ android {
 
 dependencies {
     implementation(projects.libraries.design)
+    implementation(projects.libraries.navigation)
     implementation(Deps.android.ktx)
     implementation(Deps.android.lifecycle)
     implementation(Deps.android.activityCompose)
