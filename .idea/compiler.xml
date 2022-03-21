@@ -7,6 +7,8 @@
       <module name="GitHubUsers.data.remote" target="11" />
       <module name="GitHubUsers.data.repository" target="11" />
       <module name="GitHubUsers.libraries.core" target="11" />
+      <module name="GitHubUsers.libraries.design" target="11" />
+      <module name="GitHubUsers.libraries.navigation" target="11" />
       <module name="GitHubUsers.libraries.test" target="11" />
     </bytecodeTargetLevel>
   </component>

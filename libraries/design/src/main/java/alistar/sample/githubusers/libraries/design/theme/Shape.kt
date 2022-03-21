@@ -1,4 +1,4 @@
-package alistar.sample.githubusers.ui.theme
+package alistar.sample.githubusers.libraries.design.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

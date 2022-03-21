@@ -1,4 +1,4 @@
-package alistar.sample.githubusers.ui.theme
+package alistar.sample.githubusers.libraries.design.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -7,9 +7,11 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
+    primary = PrimaryColor,
     primaryVariant = Purple700,
-    secondary = Teal200
+    secondary = PrimaryColor,
+    background = BackgroundColor,
+    onBackground = LightColor
 )
 
 private val LightColorPalette = lightColors(

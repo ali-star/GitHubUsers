@@ -1,4 +1,4 @@
-package alistar.sample.githubusers.ui.theme
+package alistar.sample.githubusers.libraries.design.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

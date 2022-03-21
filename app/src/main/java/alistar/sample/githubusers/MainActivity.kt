@@ -1,6 +1,6 @@
 package alistar.sample.githubusers
 
-import alistar.sample.githubusers.ui.theme.GitHubUsersTheme
+import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent

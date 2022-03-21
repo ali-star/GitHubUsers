@@ -1,4 +1,4 @@
-package alistar.sample.githubusers.navigation
+package alistar.sample.githubusers.features.design
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("alistar.sample.githubusers.navigation.test", appContext.packageName)
+        assertEquals("alistar.sample.githubusers.features.design.test", appContext.packageName)
     }
 }
