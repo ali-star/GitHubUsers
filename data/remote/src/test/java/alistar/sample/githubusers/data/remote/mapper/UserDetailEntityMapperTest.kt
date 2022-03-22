@@ -25,10 +25,10 @@ class UserDetailEntityMapperTest : TestCase() {
                     photoUrl = "photoUrl",
                     followingCount = 10,
                     followersCount = 15,
-                    organizations = "organization",
+                    company = "organization",
                     location = "Amsterdam, Netherlands",
                     twitterUsername = "@ali-star",
-                    blogUrl = "alimohsenirad.ir"
+                    blog = "alimohsenirad.ir"
                 )
             }
             AND {
@@ -66,10 +66,10 @@ class UserDetailEntityMapperTest : TestCase() {
             assertEquals(userDetailEntity.avatar, mappedUserDetail.photoUrl)
             assertEquals(userDetailEntity.following, mappedUserDetail.followingCount)
             assertEquals(userDetailEntity.followers, mappedUserDetail.followersCount)
-            assertEquals(userDetailEntity.company, mappedUserDetail.organizations)
+            assertEquals(userDetailEntity.company, mappedUserDetail.company)
             assertEquals(userDetailEntity.location, mappedUserDetail.location)
             assertEquals(userDetailEntity.twitterUsername, mappedUserDetail.twitterUsername)
-            assertEquals(userDetailEntity.blog, mappedUserDetail.blogUrl)
+            assertEquals(userDetailEntity.blog, mappedUserDetail.blog)
         }
     }
 }

@@ -4,7 +4,6 @@ import alistar.sample.githubusers.features.search.R
 import alistar.sample.githubusers.features.search.item.UserItem
 import alistar.sample.githubusers.features.search.presentation.ui.SearchBar
 import alistar.sample.githubusers.features.search.presentation.ui.UserPlaceHolder
-import alistar.sample.githubusers.libraries.design.extensions.clickableWithNoRipple
 import alistar.sample.githubusers.libraries.design.theme.BackgroundColor
 import alistar.sample.githubusers.libraries.design.theme.DimPlaceHolderColor
 import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
@@ -12,6 +11,7 @@ import alistar.sample.githubusers.libraries.design.theme.HintColor
 import alistar.sample.githubusers.libraries.design.theme.LightColor
 import alistar.sample.githubusers.libraries.design.theme.PlaceHolderColor
 import alistar.sample.githubusers.libraries.design.theme.Red
+import alistar.sample.githubusers.libraries.design.ui.ErrorState
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -61,7 +61,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -245,42 +244,6 @@ private fun NoUsersFoundState() {
 }
 
 @Composable
-private fun ErrorState(onRetry: () -> Unit = {}) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .clickableWithNoRipple { onRetry() },
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Image(
-            painter = painterResource(id = DesignResource.drawable.ic_github),
-            contentDescription = "errorStatePlaceHolderImage",
-            colorFilter = ColorFilter.tint(DimPlaceHolderColor)
-        )
-        Text(
-            modifier = Modifier.padding(top = 16.dp),
-            text = stringResource(R.string.error),
-            fontSize = 12.sp,
-            color = Red,
-            fontWeight = FontWeight.Bold
-        )
-        Text(
-            modifier = Modifier.padding(top = 8.dp),
-            text = stringResource(R.string.errorText),
-            fontSize = 12.sp,
-            color = HintColor
-        )
-        Text(
-            modifier = Modifier.padding(top = 8.dp),
-            text = stringResource(R.string.tapToRetry),
-            fontSize = 12.sp,
-            color = HintColor
-        )
-    }
-}
-
-@Composable
 private fun InitialState(startSearch: () -> Unit = {}) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -378,7 +341,9 @@ private fun UsersList(
 
 @Composable
 private fun UserListLoadingState(modifier: Modifier = Modifier) {
-    Column(modifier = modifier.fillMaxWidth().testTag("usersListPlaceHolder")) {
+    Column(modifier = modifier
+        .fillMaxWidth()
+        .testTag("usersListPlaceHolder")) {
         repeat(times = 20) {
             UserPlaceHolder()
         }

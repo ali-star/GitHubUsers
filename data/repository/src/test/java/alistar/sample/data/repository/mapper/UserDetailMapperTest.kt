@@ -25,10 +25,10 @@ class UserDetailMapperTest : TestCase() {
                     photoUrl = "photoUrl",
                     followingCount = 10,
                     followersCount = 15,
-                    organizations = "organization",
+                    company = "organization",
                     location = "Amsterdam, Netherlands",
                     twitterUsername = "@ali-star",
-                    blogUrl = "alimohsenirad.ir"
+                    blog = "alimohsenirad.ir"
                 )
             }
             AND {
@@ -65,10 +65,10 @@ class UserDetailMapperTest : TestCase() {
             assertEquals(repoUserDetail.photoUrl, mappedUserDetail.photoUrl)
             assertEquals(repoUserDetail.followingCount, mappedUserDetail.followingCount)
             assertEquals(repoUserDetail.followersCount, mappedUserDetail.followersCount)
-            assertEquals(repoUserDetail.organizations, mappedUserDetail.organizations)
+            assertEquals(repoUserDetail.company, mappedUserDetail.organizations)
             assertEquals(repoUserDetail.location, mappedUserDetail.location)
             assertEquals(repoUserDetail.twitterUsername, mappedUserDetail.twitterUsername)
-            assertEquals(repoUserDetail.blogUrl, mappedUserDetail.blogUrl)
+            assertEquals(repoUserDetail.blog, mappedUserDetail.blogUrl)
         }
     }
 }

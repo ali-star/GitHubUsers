@@ -56,10 +56,10 @@ class GitHubRepositoryImplTest : TestCase() {
                     photoUrl = "photoUrl",
                     followersCount = 10,
                     followingCount = 10,
-                    organizations = "organization",
+                    company = "organization",
                     location = "Amsterdam, Netherlands",
                     twitterUsername = "@ali-star",
-                    blogUrl = "alimohsenirad.ir"
+                    blog = "alimohsenirad.ir"
                 )
             }
         }

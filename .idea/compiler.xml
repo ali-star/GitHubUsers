@@ -7,6 +7,7 @@
       <module name="GitHubUsers.data.remote" target="11" />
       <module name="GitHubUsers.data.repository" target="11" />
       <module name="GitHubUsers.features.search" target="11" />
+      <module name="GitHubUsers.features.user-detail" target="11" />
       <module name="GitHubUsers.libraries.core" target="11" />
       <module name="GitHubUsers.libraries.design" target="11" />
       <module name="GitHubUsers.libraries.navigation" target="11" />

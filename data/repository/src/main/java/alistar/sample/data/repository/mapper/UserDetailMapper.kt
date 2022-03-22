@@ -9,8 +9,8 @@ fun RepoUserDetail.toDomain(): UserDetail = UserDetail(
     photoUrl = photoUrl,
     followersCount = followersCount,
     followingCount = followingCount,
-    organizations = organizations,
+    organizations = company,
     location = location,
     twitterUsername = twitterUsername,
-    blogUrl = blogUrl
+    blogUrl = blog
 )

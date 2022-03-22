@@ -5,12 +5,12 @@ import alistar.sample.githubusers.data.remote.entity.UserDetailEntity
 
 fun UserDetailEntity.toRepo(): RepoUserDetail = RepoUserDetail(
     username = login,
-    name = name,
+    name = if (name.isNullOrEmpty()) null else name,
     photoUrl = if (gravatar.isNullOrEmpty()) avatar else "https://www.gravatar.com/avatar/$gravatar",
     followersCount = followers,
     followingCount = following,
-    organizations = company,
-    location = location,
-    twitterUsername = twitterUsername,
-    blogUrl = blog
+    company = if (company.isNullOrEmpty()) null else company,
+    location = if (location.isNullOrEmpty()) null else location,
+    twitterUsername = if (twitterUsername.isNullOrEmpty()) null else twitterUsername,
+    blog = if (blog.isNullOrEmpty()) null else blog,
 )

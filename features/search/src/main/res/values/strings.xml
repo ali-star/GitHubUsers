@@ -3,9 +3,6 @@
     <string name="searchBarHint">Type username for search</string>
     <string name="startSearch">Start search</string>
     <string name="noUsersFound">No users found</string>
-    <string name="error">Error</string>
-    <string name="errorText">Please check your internet connection</string>
-    <string name="tapToRetry">TAP TO RETRY</string>
     <string name="snackbarErrorText">Error getting new users</string>
     <string name="retry">Retry</string>
 </resources>

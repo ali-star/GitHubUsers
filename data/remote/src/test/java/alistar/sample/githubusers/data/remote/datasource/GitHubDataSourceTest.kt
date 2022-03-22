@@ -74,10 +74,10 @@ class GitHubDataSourceTest : TestCase() {
             assertEquals("https://avatars.githubusercontent.com/u/5895322?v=4", user.photoUrl)
             assertEquals(6, user.followersCount)
             assertEquals(6, user.followingCount)
-            assertEquals("My Company", user.organizations)
+            assertEquals("My Company", user.company)
             assertEquals("Amsterdam, Netherlands", user.location)
             assertEquals("@ali-star", user.twitterUsername)
-            assertEquals("alimohsenirad.ir", user.blogUrl)
+            assertEquals("alimohsenirad.ir", user.blog)
         }
     }
 }

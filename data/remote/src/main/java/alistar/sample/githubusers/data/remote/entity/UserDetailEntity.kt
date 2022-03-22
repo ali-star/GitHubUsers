@@ -20,7 +20,7 @@ data class UserDetailEntity(
     val following: Int,
 
     @SerializedName("name")
-    val name: String,
+    val name: String?,
 
     @SerializedName("company")
     val company: String?,

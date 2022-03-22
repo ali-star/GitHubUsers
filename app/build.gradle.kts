@@ -50,6 +50,7 @@ dependencies {
     implementation(projects.libraries.design)
     implementation(projects.libraries.navigation)
     implementation(projects.features.search)
+    implementation(projects.features.userDetail)
     implementation(projects.data.repository)
     implementation(projects.data.remote)
     implementation(Deps.android.ktx)
