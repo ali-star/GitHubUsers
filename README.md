@@ -1,4 +1,6 @@
 # 👥 GitHubUsers
+![GitHubUsersUI](https://user-images.githubusercontent.com/5895322/159549828-b185c150-21d4-45ce-bfa2-f8b6b1b2c4fd.png)
+
 Sample app for searching github users.
 
 This application is using the latest tools and libraries with Hexagonal Architecture + MVI pattern.
