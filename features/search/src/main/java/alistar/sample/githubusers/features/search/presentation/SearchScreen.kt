@@ -4,11 +4,8 @@ import alistar.sample.githubusers.features.search.R
 import alistar.sample.githubusers.features.search.item.UserItem
 import alistar.sample.githubusers.features.search.presentation.ui.SearchBar
 import alistar.sample.githubusers.features.search.presentation.ui.UserPlaceHolder
-import alistar.sample.githubusers.libraries.design.theme.BackgroundColor
-import alistar.sample.githubusers.libraries.design.theme.DimPlaceHolderColor
 import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
 import alistar.sample.githubusers.libraries.design.theme.HintColor
-import alistar.sample.githubusers.libraries.design.theme.LightColor
 import alistar.sample.githubusers.libraries.design.theme.PlaceHolderColor
 import alistar.sample.githubusers.libraries.design.theme.Red
 import alistar.sample.githubusers.libraries.design.ui.ErrorState
@@ -35,6 +32,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Snackbar
 import androidx.compose.material.SnackbarDuration
@@ -182,7 +180,7 @@ private fun SnackbarHost(lazyPagingItems: LazyPagingItems<UserItem>?) {
                         .padding(16.dp)
                         .border(
                             width = 1.dp,
-                            color = Red,
+                            color = MaterialTheme.colors.error,
                             shape = RoundedCornerShape(10.dp)
                         ),
                     action = {
@@ -200,8 +198,8 @@ private fun SnackbarHost(lazyPagingItems: LazyPagingItems<UserItem>?) {
                     },
                     shape = RoundedCornerShape(10.dp),
                     elevation = 0.dp,
-                    backgroundColor = BackgroundColor,
-                    contentColor = Red,
+                    backgroundColor = MaterialTheme.colors.background,
+                    contentColor = MaterialTheme.colors.onError,
                 ) {
                     Text(text = snackbarData.message)
                 }
@@ -232,7 +230,7 @@ private fun NoUsersFoundState() {
         Image(
             painter = painterResource(id = DesignResource.drawable.ic_github),
             contentDescription = "noUsersFoundPlaceHolderImage",
-            colorFilter = ColorFilter.tint(DimPlaceHolderColor)
+            colorFilter = ColorFilter.tint(MaterialTheme.colors.surface)
         )
         Text(
             modifier = Modifier.padding(top = 16.dp),
@@ -250,7 +248,7 @@ private fun InitialState(startSearch: () -> Unit = {}) {
             modifier = Modifier.align(Alignment.Center),
             painter = painterResource(id = DesignResource.drawable.ic_github),
             contentDescription = "initialStatePlaceHolderImage",
-            colorFilter = ColorFilter.tint(DimPlaceHolderColor)
+            colorFilter = ColorFilter.tint(MaterialTheme.colors.surface)
         )
         Row(
             modifier = Modifier
@@ -270,7 +268,7 @@ private fun InitialState(startSearch: () -> Unit = {}) {
                     .padding(start = 16.dp)
                     .testTag("searchButton"),
                 shape = RoundedCornerShape(10.dp),
-                contentColor = LightColor,
+                contentColor = MaterialTheme.colors.onBackground,
                 onClick = { startSearch() }
             ) {
                 Icon(imageVector = Icons.Rounded.Search, contentDescription = "searchIcon")
@@ -341,9 +339,11 @@ private fun UsersList(
 
 @Composable
 private fun UserListLoadingState(modifier: Modifier = Modifier) {
-    Column(modifier = modifier
-        .fillMaxWidth()
-        .testTag("usersListPlaceHolder")) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag("usersListPlaceHolder")
+    ) {
         repeat(times = 20) {
             UserPlaceHolder()
         }

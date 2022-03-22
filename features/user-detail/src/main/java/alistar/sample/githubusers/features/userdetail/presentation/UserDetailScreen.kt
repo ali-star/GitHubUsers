@@ -4,10 +4,8 @@ import alistar.sample.githubusers.features.userdetail.R
 import alistar.sample.githubusers.features.userdetail.item.UserDetailItem
 import alistar.sample.githubusers.features.userdetail.presentation.ui.TopBar
 import alistar.sample.githubusers.libraries.core.extensions.toQuantityString
-import alistar.sample.githubusers.libraries.design.theme.DimPlaceHolderColor
 import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
 import alistar.sample.githubusers.libraries.design.theme.HintColor
-import alistar.sample.githubusers.libraries.design.theme.LightColor
 import alistar.sample.githubusers.libraries.design.theme.PlaceHolderColor
 import alistar.sample.githubusers.libraries.design.ui.ErrorState
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -30,6 +28,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -192,7 +191,7 @@ private fun ResultState(
             modifier = Modifier
                 .size(180.dp)
                 .clip(CircleShape)
-                .background(color = DimPlaceHolderColor),
+                .background(color = MaterialTheme.colors.onSecondary),
             painter = rememberImagePainter(data = userDetail.photoUrl),
             contentDescription = ""
         )
@@ -200,7 +199,10 @@ private fun ResultState(
             modifier = Modifier.padding(top = 16.dp),
             text = userDetail.username,
             fontSize = 23.sp,
-            style = TextStyle(fontWeight = FontWeight.Bold, color = LightColor)
+            style = TextStyle(
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colors.onBackground
+            )
         )
         if (userDetail.name != null) {
             Text(
@@ -227,7 +229,7 @@ private fun UserNetworkInfo(userDetail: UserDetailItem) {
             tint = HintColor
         )
         val text = buildAnnotatedString {
-            withStyle(style = SpanStyle(color = LightColor)) {
+            withStyle(style = SpanStyle(color = MaterialTheme.colors.onBackground)) {
                 append(userDetail.followersCount.toQuantityString())
             }
             withStyle(style = SpanStyle(color = HintColor)) {
@@ -237,7 +239,7 @@ private fun UserNetworkInfo(userDetail: UserDetailItem) {
                     append(" ${stringResource(R.string.follower)} • ")
                 }
             }
-            withStyle(style = SpanStyle(color = LightColor)) {
+            withStyle(style = SpanStyle(color = MaterialTheme.colors.onBackground)) {
                 append(userDetail.followingCount.toQuantityString())
             }
             withStyle(style = SpanStyle(color = HintColor)) {
@@ -286,7 +288,7 @@ private fun userInfoItems(
                     Icon(
                         imageVector = Icons.Outlined.Business,
                         contentDescription = "company",
-                        tint = LightColor
+                        tint = MaterialTheme.colors.onBackground
                     )
                 },
                 second = it,
@@ -301,7 +303,7 @@ private fun userInfoItems(
                     Icon(
                         imageVector = Icons.Outlined.Place,
                         contentDescription = "location",
-                        tint = LightColor
+                        tint = MaterialTheme.colors.onBackground
                     )
                 },
                 second = it,
@@ -318,7 +320,7 @@ private fun userInfoItems(
                             id = DesignResource.drawable.ic_twitter
                         ),
                         contentDescription = "twitterUsername",
-                        tint = LightColor
+                        tint = MaterialTheme.colors.onBackground
                     )
                 },
                 second = it,
@@ -333,7 +335,7 @@ private fun userInfoItems(
                     Icon(
                         imageVector = Icons.Outlined.Link,
                         contentDescription = "blog",
-                        tint = LightColor
+                        tint = MaterialTheme.colors.onBackground
                     )
                 },
                 second = it,
@@ -389,7 +391,7 @@ fun UserInfoItem(
             modifier = Modifier.padding(start = 8.dp),
             text = text,
             fontSize = 14.sp,
-            color = LightColor,
+            color = MaterialTheme.colors.onBackground,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )

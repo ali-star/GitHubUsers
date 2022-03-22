@@ -2,7 +2,6 @@ package alistar.sample.githubusers.libraries.design.ui
 
 import alistar.sample.githubusers.libraries.design.R
 import alistar.sample.githubusers.libraries.design.extensions.clickableWithNoRipple
-import alistar.sample.githubusers.libraries.design.theme.DimPlaceHolderColor
 import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
 import alistar.sample.githubusers.libraries.design.theme.HintColor
 import alistar.sample.githubusers.libraries.design.theme.Red
@@ -11,6 +10,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +36,7 @@ fun ErrorState(modifier: Modifier = Modifier, onRetry: () -> Unit = {}) {
         Image(
             painter = painterResource(id = R.drawable.ic_github),
             contentDescription = "errorStatePlaceHolderImage",
-            colorFilter = ColorFilter.tint(DimPlaceHolderColor)
+            colorFilter = ColorFilter.tint(MaterialTheme.colors.surface)
         )
         Text(
             modifier = Modifier.padding(top = 16.dp),

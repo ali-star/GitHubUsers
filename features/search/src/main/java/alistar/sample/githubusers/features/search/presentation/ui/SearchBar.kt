@@ -1,7 +1,6 @@
 package alistar.sample.githubusers.features.search.presentation.ui
 
 import alistar.sample.githubusers.features.search.R
-import alistar.sample.githubusers.libraries.design.theme.DimPlaceHolderColor
 import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
 import alistar.sample.githubusers.libraries.design.theme.HintColor
 import alistar.sample.githubusers.libraries.design.utils.isKeyboardOpen
@@ -24,6 +23,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -65,7 +65,7 @@ fun SearchBar(
             .fillMaxWidth()
             .height(54.dp)
             .background(
-                color = DimPlaceHolderColor,
+                color = MaterialTheme.colors.surface,
                 shape = RoundedCornerShape(percent = 50)
             )
             .testTag("searchBar"),
@@ -170,9 +170,10 @@ private fun RowScope.GitHubIcon(
             enter = fadeIn() + scaleIn(),
             exit = fadeOut() + scaleOut()
         ) {
-            Image(
+            Icon(
                 modifier = Modifier.align(Alignment.Center),
                 painter = painterResource(id = DesignResources.drawable.ic_github),
+                tint = MaterialTheme.colors.onSurface,
                 contentDescription = "gitHubIcon"
             )
         }
