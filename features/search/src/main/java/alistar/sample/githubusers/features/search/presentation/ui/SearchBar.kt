@@ -11,7 +11,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -21,6 +20,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -48,6 +49,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import alistar.sample.githubusers.libraries.design.R as DesignResources
@@ -92,7 +95,8 @@ fun SearchBar(
         TextFiled(
             focusRequester = focusRequester,
             inputText = inputText,
-            onTextChanged = onTextChanged
+            onTextChanged = onTextChanged,
+            closeKeyboard = { focusManager.clearFocus() }
         )
         GitHubIcon(
             isInSearchState = isKeyboardOpen || requestFocus,
@@ -106,7 +110,8 @@ fun SearchBar(
 private fun RowScope.TextFiled(
     focusRequester: FocusRequester,
     inputText: String,
-    onTextChanged: (text: String) -> Unit
+    onTextChanged: (text: String) -> Unit,
+    closeKeyboard: () -> Unit
 ) {
     var isFocused by remember { mutableStateOf(false) }
     TextField(
@@ -117,11 +122,18 @@ private fun RowScope.TextFiled(
             .onFocusChanged { isFocused = it.isFocused }
             .testTag("searchTextField"),
         value = inputText,
+        onValueChange = {
+            if (!it.contains("\n")) {
+                onTextChanged(it)
+            }
+        },
+        keyboardActions = KeyboardActions(onDone = { closeKeyboard() }),
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent
         ),
+        singleLine = true,
         leadingIcon = {
             Icon(
                 modifier = Modifier.size(26.dp),
@@ -134,9 +146,6 @@ private fun RowScope.TextFiled(
             AnimatedVisibility(visible = isFocused.not()) {
                 Text(text = stringResource(R.string.searchBarHint), color = HintColor)
             }
-        },
-        onValueChange = {
-            onTextChanged(it)
         }
     )
 }
