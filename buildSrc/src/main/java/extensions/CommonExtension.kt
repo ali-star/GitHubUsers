@@ -2,7 +2,6 @@ package extensions
 
 import Versions
 import com.android.build.api.dsl.CommonExtension
-import gradle.kotlin.dsl.accessors._5946a4d43cee9e5f506e97277a76864d.android
 
 /**
  * Adds the base Compose configurations on Gradle.

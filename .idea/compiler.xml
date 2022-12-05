@@ -2,8 +2,11 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
+      <module name="GitHub.GitHubUsers.buildSrc" target="11" />
       <module name="GitHubUsers.app" target="11" />
       <module name="GitHubUsers.buildSrc" target="11" />
+      <module name="GitHubUsers.buildSrc.main" target="11" />
+      <module name="GitHubUsers.buildSrc.test" target="11" />
       <module name="GitHubUsers.data.remote" target="11" />
       <module name="GitHubUsers.data.repository" target="11" />
       <module name="GitHubUsers.features.search" target="11" />

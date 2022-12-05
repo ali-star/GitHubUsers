@@ -1,3 +1,12 @@
+pluginManagement {
+    includeBuild("build-logic")
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 rootProject.name = "GitHubUsers"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
