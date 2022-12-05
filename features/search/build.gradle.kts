@@ -1,3 +1,4 @@
+/*
 import extensions.addHiltTestDependencies
 import extensions.addTestDependencies
 
@@ -27,3 +28,4 @@ dependencies {
 
     testImplementation(projects.libraries.test)
 }
+*/

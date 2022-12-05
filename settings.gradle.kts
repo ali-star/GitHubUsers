@@ -7,8 +7,15 @@ pluginManagement {
     }
 }
 
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
 rootProject.name = "GitHubUsers"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(":app")
 include(":libraries")
 include(":libraries:core")

@@ -1,3 +1,4 @@
+/*
 import extensions.addComposeDependencies
 
 plugins {
@@ -8,3 +9,4 @@ plugins {
 dependencies {
     addComposeDependencies()
 }
+*/

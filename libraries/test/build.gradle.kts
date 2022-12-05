@@ -1,3 +1,4 @@
+/*
 plugins {
     id(GradlePlugin.ANDROID_LIBRARY)
     id(GradlePlugin.COMPOSE)
@@ -14,3 +15,4 @@ dependencies {
     implementation(Deps.test.composeUiTestManifest)
     implementation(Deps.test.composeUiJunit4)
 }
+*/

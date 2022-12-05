@@ -1,3 +1,4 @@
+/*
 import extensions.addTestDependencies
 
 plugins {
@@ -12,3 +13,4 @@ dependencies {
     testImplementation(projects.libraries.test)
     addTestDependencies()
 }
+*/

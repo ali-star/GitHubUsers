@@ -1,4 +1,4 @@
-import extensions.addHiltTestDependencies
+/*import extensions.addHiltTestDependencies
 import extensions.addTestDependencies
 
 plugins {
@@ -20,4 +20,4 @@ dependencies {
 
     addTestDependencies()
     addHiltTestDependencies()
-}
+}*/

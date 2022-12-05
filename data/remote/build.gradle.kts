@@ -1,20 +1,14 @@
-import extensions.addHiltTestDependencies
-import extensions.addTestDependencies
-import java.io.File
-import java.io.FileInputStream
-import java.util.Properties
-
-plugins {
+/*plugins {
     id(GradlePlugin.ANDROID_LIBRARY)
     id(GradlePlugin.KAPT)
     id(GradlePlugin.HILT)
 }
 
 android {
-    /*
+    *//*
      * Please create a file named githubauth.properties inside the root project
      * and add your username (username) and github personal access token (token) in it.
-     */
+     *//*
     val authProperties = Properties().apply {
         load(FileInputStream(File(rootProject.rootDir, "githubauth.properties")))
     }
@@ -50,4 +44,4 @@ dependencies {
 
     testImplementation(projects.libraries.test)
     testImplementation(Deps.retrofit.mockWebServer)
-}
+}*/

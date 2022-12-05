@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel target="11">
+      <module name="build-logic" target="1.8" />
+      <module name="build-logic.convention" target="1.8" />
+      <module name="build-logic.convention.main" target="1.8" />
+      <module name="build-logic.convention.test" target="1.8" />
+      <module name="build-logic.main" target="1.8" />
+      <module name="build-logic.test" target="1.8" />
       <module name="GitHub.GitHubUsers.buildSrc" target="11" />
-      <module name="GitHubUsers.app" target="11" />
       <module name="GitHubUsers.buildSrc" target="11" />
       <module name="GitHubUsers.buildSrc.main" target="11" />
       <module name="GitHubUsers.buildSrc.test" target="11" />
-      <module name="GitHubUsers.data.remote" target="11" />
-      <module name="GitHubUsers.data.repository" target="11" />
-      <module name="GitHubUsers.features.search" target="11" />
-      <module name="GitHubUsers.features.user-detail" target="11" />
-      <module name="GitHubUsers.libraries.core" target="11" />
-      <module name="GitHubUsers.libraries.design" target="11" />
-      <module name="GitHubUsers.libraries.navigation" target="11" />
-      <module name="GitHubUsers.libraries.test" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,15 +1,14 @@
-import extensions.addComposeConfig
-import extensions.addComposeDependencies
-
 plugins {
-    id(GradlePlugin.ANDROID_APPLICATION)
+    // id("githubusers.android.application")
+    // id("githubusers.android.hilt")
+    /*id(GradlePlugin.ANDROID_APPLICATION)
     id(GradlePlugin.KOTLIN_ANDROID)
     id(GradlePlugin.KOTLIN_QUALITY)
     id(GradlePlugin.KAPT)
-    id(GradlePlugin.HILT)
+    id(GradlePlugin.HILT)*/
 }
 
-android {
+/*android {
     defaultConfig {
         applicationId = "alistar.sample.githubusers"
         versionCode = Releases.versionCode
@@ -67,4 +66,4 @@ dependencies {
     kapt(Deps.hilt.compiler)
     kaptTest(Deps.hilt.compiler)
     kaptAndroidTest(Deps.hilt.compiler)
-}
+}*/

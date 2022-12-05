@@ -1,4 +1,4 @@
-plugins {
+/*plugins {
     id(GradlePlugin.KOTLIN_LIBRARY)
 }
 
@@ -11,4 +11,4 @@ dependencies {
     implementation(Deps.coroutines.core)
     implementation(Deps.paging.common)
     implementation(Deps.hilt.inject)
-}
+}*/
