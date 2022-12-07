@@ -1,14 +1,20 @@
-/*plugins {
-    id(GradlePlugin.ANDROID_LIBRARY)
+import java.io.File
+import java.io.FileInputStream
+import java.util.Properties
+
+plugins {
+    id("githubusers.android.library")
+    id("githubusers.android.hilt")
+    /*id(GradlePlugin.ANDROID_LIBRARY)
     id(GradlePlugin.KAPT)
-    id(GradlePlugin.HILT)
+    id(GradlePlugin.HILT)*/
 }
 
 android {
-    *//*
+    /*
      * Please create a file named githubauth.properties inside the root project
      * and add your username (username) and github personal access token (token) in it.
-     *//*
+     */
     val authProperties = Properties().apply {
         load(FileInputStream(File(rootProject.rootDir, "githubauth.properties")))
     }
@@ -27,7 +33,13 @@ android {
 }
 
 dependencies {
-    implementation(projects.data.repository)
+    implementation(project(":data:repository"))
+    implementation(libs.okhttp.logging)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.gson.converter)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.paging.common)
+    /*implementation(projects.data.repository)
     implementation(Deps.coroutines.core)
     implementation(Deps.retrofit.gsonConverter)
     implementation(Deps.retrofit.loggingInterceptor)
@@ -43,5 +55,5 @@ dependencies {
     addHiltTestDependencies()
 
     testImplementation(projects.libraries.test)
-    testImplementation(Deps.retrofit.mockWebServer)
-}*/
+    testImplementation(Deps.retrofit.mockWebServer)*/
+}

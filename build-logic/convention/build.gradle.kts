@@ -48,5 +48,9 @@ gradlePlugin {
             id = "githubusers.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("kotlinLibrary") {
+            id = "githubusers.kotlin.library"
+            implementationClass = "KotlinLibraryConventionPlugin"
+        }
     }
 }

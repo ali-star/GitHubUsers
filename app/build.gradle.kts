@@ -1,6 +1,7 @@
 plugins {
-    // id("githubusers.android.application")
-    // id("githubusers.android.hilt")
+    id("githubusers.android.application")
+    id("githubusers.android.application.compose")
+    id("githubusers.android.hilt")
     /*id(GradlePlugin.ANDROID_APPLICATION)
     id(GradlePlugin.KOTLIN_ANDROID)
     id(GradlePlugin.KOTLIN_QUALITY)
@@ -8,14 +9,14 @@ plugins {
     id(GradlePlugin.HILT)*/
 }
 
-/*android {
+android {
     defaultConfig {
         applicationId = "alistar.sample.githubusers"
-        versionCode = Releases.versionCode
-        versionName = Releases.versionName
-        compileSdk = Versions.compileSdk
-        minSdk = Versions.minSdk
-        targetSdk = Versions.targetSdk
+        versionCode = 1
+        versionName = "1.0.0"
+        compileSdk = 31
+        minSdk = 21
+        targetSdk = 31
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -34,25 +35,24 @@ plugins {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    addComposeConfig()
-
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
         }
     }
+    namespace = "com.alistar.sample.githubusers"
 }
 
 dependencies {
-    implementation(projects.domain)
-    implementation(projects.libraries.design)
-    implementation(projects.libraries.navigation)
-    implementation(projects.features.search)
-    implementation(projects.features.userDetail)
-    implementation(projects.data.repository)
-    implementation(projects.data.remote)
-    implementation(Deps.android.ktx)
+    implementation(project(":domain"))
+    implementation(project(":libraries:design"))
+    implementation(project(":libraries:navigation"))
+    implementation(project(":features:search"))
+    implementation(project(":features:user-detail"))
+    implementation(project(":data:repository"))
+    implementation(project(":data:remote"))
+    /*implementation(Deps.android.ktx)
     implementation(Deps.android.lifecycle)
     implementation(Deps.android.activityCompose)
     implementation(Deps.compose.ui)
@@ -65,5 +65,5 @@ dependencies {
 
     kapt(Deps.hilt.compiler)
     kaptTest(Deps.hilt.compiler)
-    kaptAndroidTest(Deps.hilt.compiler)
-}*/
+    kaptAndroidTest(Deps.hilt.compiler)*/
+}

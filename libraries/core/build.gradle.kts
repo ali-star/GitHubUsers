@@ -1,3 +1,13 @@
+plugins {
+    id("githubusers.android.library")
+    id("githubusers.android.library.compose")
+}
+
+dependencies {
+    implementation(libs.android.material)
+    implementation(libs.kotlinx.coroutines.core)
+}
+
 /*
 import extensions.addTestDependencies
 
