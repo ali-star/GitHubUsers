@@ -2,11 +2,6 @@ plugins {
     id("githubusers.android.application")
     id("githubusers.android.application.compose")
     id("githubusers.android.hilt")
-    /*id(GradlePlugin.ANDROID_APPLICATION)
-    id(GradlePlugin.KOTLIN_ANDROID)
-    id(GradlePlugin.KOTLIN_QUALITY)
-    id(GradlePlugin.KAPT)
-    id(GradlePlugin.HILT)*/
 }
 
 android {
@@ -14,9 +9,6 @@ android {
         applicationId = "alistar.sample.githubusers"
         versionCode = 1
         versionName = "1.0.0"
-        compileSdk = 31
-        minSdk = 21
-        targetSdk = 31
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -41,7 +33,7 @@ android {
             isReturnDefaultValues = true
         }
     }
-    namespace = "com.alistar.sample.githubusers"
+    namespace = "alistar.sample.githubusers"
 }
 
 dependencies {
@@ -52,18 +44,13 @@ dependencies {
     implementation(project(":features:user-detail"))
     implementation(project(":data:repository"))
     implementation(project(":data:remote"))
-    /*implementation(Deps.android.ktx)
-    implementation(Deps.android.lifecycle)
-    implementation(Deps.android.activityCompose)
-    implementation(Deps.compose.ui)
-    implementation(Deps.compose.material)
-    implementation(Deps.compose.uiTooling)
-    implementation(Deps.hilt.android)
-    implementation(Deps.hilt.hiltNavCompose)
-
-    addComposeDependencies()
-
-    kapt(Deps.hilt.compiler)
-    kaptTest(Deps.hilt.compiler)
-    kaptAndroidTest(Deps.hilt.compiler)*/
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
 }

@@ -4,6 +4,7 @@ import alistar.sample.githubusers.features.search.presentation.SearchScreen
 import alistar.sample.githubusers.features.search.presentation.SearchScreenViewModel
 import alistar.sample.githubusers.features.userdetail.presentation.UserDetailScreen
 import alistar.sample.githubusers.features.userdetail.presentation.UserDetailScreenViewModel
+import alistar.sample.githubusers.libraries.navigation.BuildConfig
 import alistar.sample.githubusers.libraries.navigation.DestinationArgs
 import alistar.sample.githubusers.libraries.navigation.Destinations
 import android.content.ActivityNotFoundException

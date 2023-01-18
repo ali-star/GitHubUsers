@@ -5,9 +5,8 @@ import java.util.Properties
 plugins {
     id("githubusers.android.library")
     id("githubusers.android.hilt")
-    /*id(GradlePlugin.ANDROID_LIBRARY)
-    id(GradlePlugin.KAPT)
-    id(GradlePlugin.HILT)*/
+    id("githubusers.android.hilt.test")
+    id("githubusers.test")
 }
 
 android {
@@ -39,21 +38,6 @@ dependencies {
     implementation(libs.retrofit.gson.converter)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.paging.common)
-    /*implementation(projects.data.repository)
-    implementation(Deps.coroutines.core)
-    implementation(Deps.retrofit.gsonConverter)
-    implementation(Deps.retrofit.loggingInterceptor)
-    implementation(Deps.paging.runtime)
-    implementation(Deps.hilt.android)
 
-    api(Deps.retrofit.retrofit)
-    api(Deps.gson)
-
-    kapt(Deps.hilt.compiler)
-
-    addTestDependencies()
-    addHiltTestDependencies()
-
-    testImplementation(projects.libraries.test)
-    testImplementation(Deps.retrofit.mockWebServer)*/
+    testImplementation(libs.okhttp.mockWebServer)
 }

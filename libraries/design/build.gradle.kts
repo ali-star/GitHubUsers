@@ -1,12 +1,4 @@
-/*
-import extensions.addComposeDependencies
-
 plugins {
-    id(GradlePlugin.ANDROID_LIBRARY)
-    id(GradlePlugin.COMPOSE)
+    id("githubusers.android.library")
+    id("githubusers.android.library.compose")
 }
-
-dependencies {
-    addComposeDependencies()
-}
-*/

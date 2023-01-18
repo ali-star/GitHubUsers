@@ -1,7 +1,7 @@
 import com.android.build.api.variant.LibraryAndroidComponentsExtension
 import com.android.build.gradle.LibraryExtension
-import com.alistar.sample.githubusers.configureKotlinAndroid
-import com.alistar.sample.githubusers.configurePrintApksTask
+import alistar.sample.githubusers.configureKotlinAndroid
+import alistar.sample.githubusers.configurePrintApksTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalogsExtension

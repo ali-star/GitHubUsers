@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.alistar.sample.githubusers.buildlogic"
+group = "alistar.sample.githubusers.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -40,6 +40,10 @@ gradlePlugin {
             id = "githubusers.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
+        register("test") {
+            id = "githubusers.test"
+            implementationClass = "TestConventionPlugin"
+        }
         register("androidTest") {
             id = "githubusers.android.test"
             implementationClass = "AndroidTestConventionPlugin"
@@ -47,6 +51,10 @@ gradlePlugin {
         register("androidHilt") {
             id = "githubusers.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
+        }
+        register("androidHiltTest") {
+            id = "githubusers.android.hilt.test"
+            implementationClass = "AndroidHiltTestConventionPlugin"
         }
         register("kotlinLibrary") {
             id = "githubusers.kotlin.library"

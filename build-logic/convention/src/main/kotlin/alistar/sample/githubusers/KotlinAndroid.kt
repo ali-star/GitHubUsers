@@ -1,4 +1,4 @@
-package com.alistar.sample.githubusers
+package alistar.sample.githubusers
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.JavaVersion
