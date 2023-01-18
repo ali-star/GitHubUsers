@@ -1,10 +1,12 @@
-allprojects {
+buildscript {
     repositories {
         google()
         mavenCentral()
     }
 }
 
-tasks.register("clean") {
-    delete(rootProject.buildDir)
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.hilt) apply false
 }

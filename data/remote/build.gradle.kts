@@ -1,13 +1,12 @@
-import extensions.addHiltTestDependencies
-import extensions.addTestDependencies
 import java.io.File
 import java.io.FileInputStream
 import java.util.Properties
 
 plugins {
-    id(GradlePlugin.ANDROID_LIBRARY)
-    id(GradlePlugin.KAPT)
-    id(GradlePlugin.HILT)
+    id("githubusers.android.library")
+    id("githubusers.android.hilt")
+    id("githubusers.android.hilt.test")
+    id("githubusers.test")
 }
 
 android {
@@ -33,21 +32,12 @@ android {
 }
 
 dependencies {
-    implementation(projects.data.repository)
-    implementation(Deps.coroutines.core)
-    implementation(Deps.retrofit.gsonConverter)
-    implementation(Deps.retrofit.loggingInterceptor)
-    implementation(Deps.paging.runtime)
-    implementation(Deps.hilt.android)
+    implementation(project(":data:repository"))
+    implementation(libs.okhttp.logging)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.gson.converter)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.androidx.paging.common)
 
-    api(Deps.retrofit.retrofit)
-    api(Deps.gson)
-
-    kapt(Deps.hilt.compiler)
-
-    addTestDependencies()
-    addHiltTestDependencies()
-
-    testImplementation(projects.libraries.test)
-    testImplementation(Deps.retrofit.mockWebServer)
+    testImplementation(libs.okhttp.mockWebServer)
 }

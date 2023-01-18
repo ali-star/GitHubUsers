@@ -1,22 +1,14 @@
-import extensions.addComposeConfig
-import extensions.addComposeDependencies
-
 plugins {
-    id(GradlePlugin.ANDROID_APPLICATION)
-    id(GradlePlugin.KOTLIN_ANDROID)
-    id(GradlePlugin.KOTLIN_QUALITY)
-    id(GradlePlugin.KAPT)
-    id(GradlePlugin.HILT)
+    id("githubusers.android.application")
+    id("githubusers.android.application.compose")
+    id("githubusers.android.hilt")
 }
 
 android {
     defaultConfig {
         applicationId = "alistar.sample.githubusers"
-        versionCode = Releases.versionCode
-        versionName = Releases.versionName
-        compileSdk = Versions.compileSdk
-        minSdk = Versions.minSdk
-        targetSdk = Versions.targetSdk
+        versionCode = 1
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -35,36 +27,30 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    addComposeConfig()
-
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
         }
     }
+    namespace = "alistar.sample.githubusers"
 }
 
 dependencies {
-    implementation(projects.domain)
-    implementation(projects.libraries.design)
-    implementation(projects.libraries.navigation)
-    implementation(projects.features.search)
-    implementation(projects.features.userDetail)
-    implementation(projects.data.repository)
-    implementation(projects.data.remote)
-    implementation(Deps.android.ktx)
-    implementation(Deps.android.lifecycle)
-    implementation(Deps.android.activityCompose)
-    implementation(Deps.compose.ui)
-    implementation(Deps.compose.material)
-    implementation(Deps.compose.uiTooling)
-    implementation(Deps.hilt.android)
-    implementation(Deps.hilt.hiltNavCompose)
-
-    addComposeDependencies()
-
-    kapt(Deps.hilt.compiler)
-    kaptTest(Deps.hilt.compiler)
-    kaptAndroidTest(Deps.hilt.compiler)
+    implementation(project(":domain"))
+    implementation(project(":libraries:design"))
+    implementation(project(":libraries:navigation"))
+    implementation(project(":features:search"))
+    implementation(project(":features:user-detail"))
+    implementation(project(":data:repository"))
+    implementation(project(":data:remote"))
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
 }
