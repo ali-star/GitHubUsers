@@ -98,9 +98,10 @@ private fun SearchScreenLoader(
 
 @Composable
 internal fun SearchScreenScaffold(viewState: SearchScreenViewState, actions: SearchScreenActions) {
-    Scaffold {
+    Scaffold { innerPadding ->
         val lazyPagingItems = viewState.pagingData?.collectAsLazyPagingItems()
         MainContent(
+            modifier = Modifier.padding(innerPadding),
             inputText = viewState.inputText,
             lazyPagingItems = lazyPagingItems,
             actions = actions,
@@ -117,6 +118,7 @@ internal fun SearchScreenScaffold(viewState: SearchScreenViewState, actions: Sea
 
 @Composable
 private fun MainContent(
+    modifier: Modifier = Modifier,
     inputText: String,
     lazyPagingItems: LazyPagingItems<UserItem>?,
     actions: SearchScreenActions,
@@ -127,17 +129,24 @@ private fun MainContent(
     val refreshLoadState = lazyPagingItems?.loadState?.refresh
 
     if (lazyPagingItems == null) {
-        InitialState(startSearch = { actions.focusSearchBar(true) })
+        InitialState(
+            modifier = modifier,
+            startSearch = { actions.focusSearchBar(true) },
+        )
     } else if (refreshLoadState is LoadState.Loading) {
-        UserListLoadingState(modifier = Modifier.padding(top = searchBarHeightWithPadding))
+        UserListLoadingState(modifier = modifier.padding(top = searchBarHeightWithPadding))
     } else if (refreshLoadState is LoadState.Error) {
-        ErrorState(onRetry = { lazyPagingItems.retry() })
+        ErrorState(
+            modifier = modifier,
+            onRetry = { lazyPagingItems.retry() },
+        )
     } else if (lazyPagingItems.loadState.append.endOfPaginationReached && lazyPagingItems.itemCount == 0) {
-        NoUsersFoundState()
+        NoUsersFoundState(modifier = modifier)
     } else {
         val lazyListState = rememberLazyListState()
         KeyboardManager(lazyListState)
         UsersList(
+            modifier = modifier,
             lazyListState = lazyListState,
             contentPadding = PaddingValues(top = searchBarHeightWithPadding, bottom = 70.dp),
             items = lazyPagingItems,
@@ -146,7 +155,7 @@ private fun MainContent(
     }
 
     SearchBar(
-        modifier = Modifier
+        modifier = modifier
             .padding(16.dp)
             .height(searchBarHeight),
         inputText = inputText,
@@ -221,9 +230,11 @@ private fun SnackbarHost(lazyPagingItems: LazyPagingItems<UserItem>?) {
 }
 
 @Composable
-private fun NoUsersFoundState() {
+private fun NoUsersFoundState(
+    modifier: Modifier = Modifier,
+) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -242,7 +253,10 @@ private fun NoUsersFoundState() {
 }
 
 @Composable
-private fun InitialState(startSearch: () -> Unit = {}) {
+private fun InitialState(
+    modifier: Modifier = Modifier,
+    startSearch: () -> Unit = {},
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.align(Alignment.Center),
