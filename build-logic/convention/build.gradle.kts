@@ -60,5 +60,9 @@ gradlePlugin {
             id = "githubusers.kotlin.library"
             implementationClass = "KotlinLibraryConventionPlugin"
         }
+        register("showkace") {
+            id = "githubusers.showkace"
+            implementationClass = "ShowkaseConventionPlugin"
+        }
     }
 }

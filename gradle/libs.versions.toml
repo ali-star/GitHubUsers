@@ -43,6 +43,7 @@ paging = "3.1.1"
 pagingCompose = "1.0.0-alpha14"
 mockk = "1.12.2"
 robolectric = "4.9.2"
+showkase = "1.0.0-beta17"
 
 [libraries]
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
@@ -104,6 +105,8 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 mockk-unit = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
 robolectric-unit = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
+showkase = { group = "com.airbnb.android", name = "showkase", version.ref = "showkase" }
+showkase-processor = { group = "com.airbnb.android", name = "showkase-processor", version.ref = "showkase" }
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }

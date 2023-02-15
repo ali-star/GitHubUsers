@@ -2,6 +2,7 @@ plugins {
     id("githubusers.android.application")
     id("githubusers.android.application.compose")
     id("githubusers.android.hilt")
+    id("githubusers.showkace")
 }
 
 android {

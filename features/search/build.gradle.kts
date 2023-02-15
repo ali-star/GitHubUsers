@@ -1,5 +1,6 @@
 plugins {
     id("githubusers.android.feature")
+    id("githubusers.showkace")
 }
 
 dependencies {
