@@ -3,7 +3,7 @@
 package alistar.sample.githubusers.features.userdetail.presentation
 
 import alistar.sample.githubusers.features.userdetail.R
-import alistar.sample.githubusers.features.userdetail.item.UserDetailItem
+import alistar.sample.githubusers.features.userdetailapi.item.UserDetailItem
 import alistar.sample.githubusers.features.userdetail.presentation.ui.TopBar
 import alistar.sample.githubusers.libraries.core.extensions.toQuantityString
 import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
@@ -210,11 +210,11 @@ private fun ResultState(
                 color = MaterialTheme.colors.onBackground
             )
         )
-        if (userDetail.name != null) {
+        userDetail.name?.let {
             Text(
                 modifier = Modifier.padding(top = 4.dp),
                 fontSize = 20.sp,
-                text = userDetail.name,
+                text = it,
                 color = HintColor
             )
         }

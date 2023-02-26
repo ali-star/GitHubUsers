@@ -1,13 +1,11 @@
 package alistar.sample.githubusers.features.search.presentation
 
-import alistar.sample.githubusers.domain.usecase.SearchUsersUseCase
-import alistar.sample.githubusers.features.search.item.UserItem
-import alistar.sample.githubusers.features.search.mapper.toView
+import alistar.sample.githubusers.features.searchapi.model.UserItem
+import alistar.sample.githubusers.features.searchapi.usecase.SearchUsersUseCase
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -15,7 +13,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -65,9 +62,7 @@ class SearchScreenViewModel @Inject constructor(
     }
 
     private fun getPagingDataFlow(searchQuery: String): Flow<PagingData<UserItem>> =
-        searchUseCase(searchQuery)
-            .cachedIn(viewModelScope)
-            .map { data -> data.map { it.toView() } }
+        searchUseCase(searchQuery).cachedIn(viewModelScope)
 
     fun updateSearchBarState(isFocused: Boolean) {
         viewModelState.update {

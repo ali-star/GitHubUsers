@@ -1,17 +1,15 @@
 package alistar.sample.githubusers.features.userdetail.presentation
 
-import alistar.sample.githubusers.domain.Result
-import alistar.sample.githubusers.domain.usecase.GetUserDetailUseCase
 import alistar.sample.githubusers.features.userdetail.exception.MissingUsernameException
-import alistar.sample.githubusers.features.userdetail.mapper.toView
+import alistar.sample.githubusers.features.userdetailapi.presentation.UserDetailViewModel
+import alistar.sample.githubusers.features.userdetailapi.usecase.GetUserDetailUserCase
 import alistar.sample.githubusers.libraries.navigation.DestinationArgs
+import alistar.sample.githubusers.libraries.core.result.Result
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,11 +17,11 @@ import javax.inject.Inject
 @HiltViewModel
 class UserDetailScreenViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getUserDetailUseCase: GetUserDetailUseCase
-) : ViewModel() {
+    private val getUserDetailUseCase: GetUserDetailUserCase
+) : UserDetailViewModel() {
 
-    private val username: String = savedStateHandle.get<String>(DestinationArgs.USERNAME)
-        ?: /*throw MissingUsernameException*/ "JakeWharton"
+    override val username: String = savedStateHandle.get<String>(DestinationArgs.USERNAME)
+        ?: throw MissingUsernameException
 
     private val viewModelState = MutableStateFlow<UserDetailScreenViewState>(
         UserDetailScreenViewState.Loading
@@ -39,13 +37,13 @@ class UserDetailScreenViewModel @Inject constructor(
         getUserDetail()
     }
 
-    private fun getUserDetail() {
+    override fun getUserDetail() {
         viewModelScope.launch {
             getUserDetailUseCase(username).collect { result ->
                 val state = when (result) {
                     is Result.Error -> UserDetailScreenViewState.Error
                     is Result.Loading -> UserDetailScreenViewState.Loading
-                    is Result.Success -> UserDetailScreenViewState.Result(result.data.toView())
+                    is Result.Success -> UserDetailScreenViewState.Result(result.data)
                 }
                 viewModelState.emit(state)
             }

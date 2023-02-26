@@ -1,9 +1,9 @@
 package alistar.sample.githubusers.features.search.presentation
 
 import alistar.sample.githubusers.features.search.R
-import alistar.sample.githubusers.features.search.item.UserItem
 import alistar.sample.githubusers.features.search.presentation.ui.SearchBar
 import alistar.sample.githubusers.features.search.presentation.ui.UserPlaceHolder
+import alistar.sample.githubusers.features.searchapi.model.UserItem
 import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
 import alistar.sample.githubusers.libraries.design.theme.HintColor
 import alistar.sample.githubusers.libraries.design.theme.PlaceHolderColor

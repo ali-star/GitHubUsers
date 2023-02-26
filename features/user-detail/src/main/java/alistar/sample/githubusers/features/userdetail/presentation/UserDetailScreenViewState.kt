@@ -1,6 +1,6 @@
 package alistar.sample.githubusers.features.userdetail.presentation
 
-import alistar.sample.githubusers.features.userdetail.item.UserDetailItem
+import alistar.sample.githubusers.features.userdetailapi.item.UserDetailItem
 
 sealed class UserDetailScreenViewState {
 
