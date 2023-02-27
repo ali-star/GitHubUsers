@@ -2,14 +2,17 @@ package alistar.sample.githubusers.features.userdetail.presentation.ui
 
 import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
 import alistar.sample.githubusers.libraries.test.BaseRobot
-import alistar.sample.githubusers.libraries.test.dsl.*
+import alistar.sample.githubusers.libraries.test.dsl.GIVEN
+import alistar.sample.githubusers.libraries.test.dsl.WHEN
+import alistar.sample.githubusers.libraries.test.dsl.THEN
+import alistar.sample.githubusers.libraries.test.dsl.AND
+import alistar.sample.githubusers.libraries.test.dsl.RUN_UI_TEST
 import androidx.compose.material.Surface
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.test.*
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.performClick
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
