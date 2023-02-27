@@ -52,7 +52,7 @@ This project is based on the [Hexagonal Architecture](https://alistair.cockburn.
 To better represents the idea behind the modules, here is an architecture image representing the flow
 of dependency:
 
-![GitHubUsersArchitecture](https://user-images.githubusercontent.com/5895322/221610371-468b7982-ac89-45e4-b5f6-33b53b5820e7.png)
+![GitHubUsersArchitecture](https://user-images.githubusercontent.com/5895322/221610774-0b43b13e-bd93-4d96-8745-cca6b373969a.png)
 
 ### 👁️🏁 Presentation Pattern
 
