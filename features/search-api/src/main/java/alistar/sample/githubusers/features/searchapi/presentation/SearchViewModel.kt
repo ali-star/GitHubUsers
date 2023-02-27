@@ -4,5 +4,5 @@ import androidx.lifecycle.ViewModel
 
 abstract class SearchViewModel : ViewModel() {
 
-    abstract fun searchUsers(query: String)
+    abstract fun search(query: String)
 }

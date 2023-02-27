@@ -1,8 +1,8 @@
 package alistar.sample.githubusers.features.search.presentation
 
 import alistar.sample.githubusers.features.searchapi.model.UserItem
+import alistar.sample.githubusers.features.searchapi.presentation.SearchViewModel
 import alistar.sample.githubusers.features.searchapi.usecase.SearchUsersUseCase
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchScreenViewModel @Inject constructor(
     private val searchUseCase: SearchUsersUseCase
-) : ViewModel() {
+) : SearchViewModel() {
 
     private val viewModelState = MutableStateFlow(SearchScreenViewState())
     val uiState = viewModelState.stateIn(
@@ -41,7 +41,7 @@ class SearchScreenViewModel @Inject constructor(
         search(text)
     }
 
-    private fun search(query: String) {
+    override fun search(query: String) {
         searchDebouncerJob.cancel()
         currentQuery = query
 
