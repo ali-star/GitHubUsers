@@ -40,6 +40,10 @@ gradlePlugin {
             id = "githubusers.android.feature"
             implementationClass = "AndroidFeatureConventionPlugin"
         }
+        register("androidFeatureApi") {
+            id = "githubusers.android.feature-api"
+            implementationClass = "AndroidFeatureApiConventionPlugin"
+        }
         register("test") {
             id = "githubusers.test"
             implementationClass = "TestConventionPlugin"

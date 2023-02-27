@@ -2,11 +2,9 @@ package alistar.sample.data.repository
 
 import alistar.sample.data.repository.datasource.GitHubDataSource
 import alistar.sample.data.repository.mapper.toDomain
-import alistar.sample.githubusers.domain.Result
 import alistar.sample.githubusers.domain.model.User
 import alistar.sample.githubusers.domain.model.UserDetail
 import alistar.sample.githubusers.domain.repository.GitHubRepository
-import alistar.sample.githubusers.libraries.core.extensions.catchError
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -29,9 +27,8 @@ class GitHubRepositoryImpl(
             pagingSourceFactory = { gitHubDataSource.searchUsers(query) }
         ).flow.map { data -> data.map { it.toDomain() } }
 
-    override fun getUserDetail(username: String): Flow<Result<UserDetail>> = flow {
-        emit(Result.Loading)
+    override fun getUserDetail(username: String): Flow<UserDetail> = flow {
         val userDetail = gitHubDataSource.getUserDetail(username)
-        emit(Result.Success(userDetail.toDomain()))
-    }.flowOn(ioDispatcher).catchError { emit(Result.Error(it)) }
+        emit(userDetail.toDomain())
+    }.flowOn(ioDispatcher)
 }

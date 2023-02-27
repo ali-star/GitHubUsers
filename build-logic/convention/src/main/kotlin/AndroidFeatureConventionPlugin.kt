@@ -17,7 +17,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
             dependencies {
-                add("implementation", project(":domain"))
                 add("implementation", project(":libraries:design"))
                 add("implementation", project(":libraries:core"))
                 add("implementation", libs.findLibrary("coil.kt").get())
