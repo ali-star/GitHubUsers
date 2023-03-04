@@ -27,7 +27,7 @@ Before running the project please create a file named `githubauth.properties` in
 - [klint](https://github.com/shyiko/ktlint)
 - [detekt](https://github.com/arturbosch/detekt)
 
-All used dependencies can be accessed in the [DependenciesFile](https://github.com/ali-star/GitHubUsers/blob/master/buildSrc/src/main/java/Dependencies.kt)
+All used dependencies can be accessed in the [DependenciesFile](https://github.com/ali-star/GitHubUsers/blob/master/gradle/libs.versions.toml)
 
 ## 🏛 Architacture & Patterns
 This project is based on the [Hexagonal Architecture](https://alistair.cockburn.us/hexagonal-architecture/) by Alistair Cockburn. The application also relies heavily on modularization for better separation of concerns and encapsulation.
