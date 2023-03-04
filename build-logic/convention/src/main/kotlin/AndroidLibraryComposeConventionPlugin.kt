@@ -14,20 +14,7 @@ class AndroidLibraryComposeConventionPlugin : Plugin<Project> {
         with(target) {
             pluginManager.apply("com.android.library")
             val extension = extensions.getByType<LibraryExtension>()
-            val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             configureAndroidCompose(extension)
-            dependencies {
-                add("implementation", libs.findLibrary("androidx.compose.runtime").get())
-                add("implementation", libs.findLibrary("androidx.compose.ui.tooling").get())
-                add("implementation", libs.findLibrary("androidx.compose.material").get())
-                add("implementation", libs.findLibrary("androidx.compose.material.iconsExtended").get())
-                add("implementation", libs.findLibrary("androidx.activity.compose").get())
-                add("implementation", libs.findLibrary("androidx.compose.ui.test").get())
-                add("implementation", libs.findLibrary("androidx.compose.ui.junit4").get())
-                add("implementation", libs.findLibrary("androidx.compose.ui.testManifest").get())
-                add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
-                add("implementation", libs.findLibrary("androidx.lifecycle.viewModelCompose").get())
-            }
         }
     }
 }

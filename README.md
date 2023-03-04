@@ -37,12 +37,16 @@ This project is based on the [Hexagonal Architecture](https://alistair.cockburn.
 * **app** - The Application module. It contains all the initialization logic for the Android
   environment and starts the _Jetpack Navigation Compose Graph_.
 * **features** - The module/folder containing all the features (visual or not) from the application
-  * **search** - Search screen of the application used for seaching users.
-  * **user-detail** - User detail screen to show user detailed info.
+  * **search-api** - Search feature **port**.
+  * **search** - Search screen of the application used for seaching users the **adapter** for the search-api.
+  * **user-detail-api** - User detail feature **port**.
+  * **user-detail** - User detail screen to show user detailed info and the **adapter** for the user-detail-api.
 * **domain** - The modules containing the most important part of the application: the business
   logic. This module depends only on itself and all interaction it does is via _dependency
   inversion_.
 * **data** - The module containing the data (repository, remote) from the app and uses the _repository pattern_.
+  * **repository** - The **port** for data layer.
+  * **remote** - The remote **adapter** for the data layer.
 * **libraries** - The module that contains libraries that may be used by any module of the app.
   * **core** - Includes common components, functions, and resources that may be needed to share between several modules.
   * **design** - Includes common components and resource for the UI.
@@ -52,7 +56,7 @@ This project is based on the [Hexagonal Architecture](https://alistair.cockburn.
 To better represents the idea behind the modules, here is an architecture image representing the flow
 of dependency:
 
-![GitHubUsersArchitecture](https://user-images.githubusercontent.com/5895322/159545684-8b934f28-3a67-4469-a425-558a24449a44.png)
+![GitHubUsersArchitecture](https://user-images.githubusercontent.com/5895322/221611881-17f1c534-9372-458e-b03c-3a6b57fa092d.png)
 
 ### 👁️🏁 Presentation Pattern
 

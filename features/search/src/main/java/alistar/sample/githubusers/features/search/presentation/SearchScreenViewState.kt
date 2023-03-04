@@ -1,6 +1,6 @@
 package alistar.sample.githubusers.features.search.presentation
 
-import alistar.sample.githubusers.features.search.item.UserItem
+import alistar.sample.githubusers.features.searchapi.model.UserItem
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 

@@ -29,9 +29,16 @@ internal fun Project.configureAndroidCompose(
         }
 
         dependencies {
-            val bom = libs.findLibrary("androidx-compose-bom").get()
-            add("implementation", platform(bom))
-            add("androidTestImplementation", platform(bom))
+            add("implementation", libs.findLibrary("androidx.compose.runtime").get())
+            add("implementation", libs.findLibrary("androidx.compose.ui.tooling").get())
+            add("implementation", libs.findLibrary("androidx.compose.material").get())
+            add("implementation", libs.findLibrary("androidx.compose.material.iconsExtended").get())
+            add("implementation", libs.findLibrary("androidx.activity.compose").get())
+            add("implementation", libs.findLibrary("androidx.compose.ui.test").get())
+            add("implementation", libs.findLibrary("androidx.compose.ui.junit4").get())
+            add("implementation", libs.findLibrary("androidx.compose.ui.testManifest").get())
+            add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
+            add("implementation", libs.findLibrary("androidx.lifecycle.viewModelCompose").get())
         }
     }
 }

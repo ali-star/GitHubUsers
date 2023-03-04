@@ -1,8 +1,8 @@
 package alistar.sample.githubusers.features.search.presentaion
 
-import alistar.sample.githubusers.domain.model.User
-import alistar.sample.githubusers.domain.usecase.SearchUsersUseCase
 import alistar.sample.githubusers.features.search.presentation.SearchScreenViewModel
+import alistar.sample.githubusers.features.searchapi.model.UserItem
+import alistar.sample.githubusers.features.searchapi.usecase.SearchUsersUseCase
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.dsl.AND
 import alistar.sample.githubusers.libraries.test.dsl.GIVEN
@@ -58,7 +58,7 @@ class SearchScreenViewModelTest : TestCase() {
                 flow {
                     val users = buildList {
                         repeat(5) {
-                            add(User(username = "user $it", photoUrl = "photoUrl"))
+                            add(UserItem(username = "user $it", photoUrl = "photoUrl"))
                         }
                     }
                     emit(PagingData.from(users))

@@ -1,9 +1,9 @@
 package alistar.sample.githubusers.features.search.presentaion
 
-import alistar.sample.githubusers.domain.model.User
-import alistar.sample.githubusers.domain.usecase.SearchUsersUseCase
 import alistar.sample.githubusers.features.search.presentation.SearchScreen
 import alistar.sample.githubusers.features.search.presentation.SearchScreenViewModel
+import alistar.sample.githubusers.features.searchapi.model.UserItem
+import alistar.sample.githubusers.features.searchapi.usecase.SearchUsersUseCase
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.exception.TestException
 import alistar.sample.githubusers.libraries.test.extensions.waitForIt
@@ -131,18 +131,18 @@ class SearchScreenRobot(private val composeContentTestRule: ComposeContentTestRu
         private val emitEmptyResult: Boolean,
         private val returnErrorOnFirstPage: Boolean,
         private val returnErrorOnSecondPage: Boolean,
-    ) : PagingSource<Int, User>() {
+    ) : PagingSource<Int, UserItem>() {
 
-        override fun getRefreshKey(state: PagingState<Int, User>): Int? = null
+        override fun getRefreshKey(state: PagingState<Int, UserItem>): Int? = null
 
-        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
+        override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UserItem> {
             val key = params.key ?: 0
             val users = if (emitEmptyResult) {
                 listOf()
             } else {
                 buildList {
                     repeat(5) {
-                        add(User(username = "User $it", photoUrl = "photoUrl"))
+                        add(UserItem(username = "User $it", photoUrl = "photoUrl"))
                     }
                 }
             }
