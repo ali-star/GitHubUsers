@@ -287,7 +287,7 @@ private fun userInfoItems(
     userDetail: UserDetailItem,
     actions: UserDetailScreenActions
 ): List<Triple<@Composable () -> Unit, String, () -> Unit>> = buildList {
-    userDetail.company?.let {
+    userDetail.organizations?.let {
         add(
             Triple(
                 first = {
@@ -317,7 +317,7 @@ private fun userInfoItems(
             )
         )
     }
-    userDetail.twitter?.let {
+    userDetail.twitterUsername?.let {
         add(
             Triple(
                 first = {
@@ -334,7 +334,7 @@ private fun userInfoItems(
             )
         )
     }
-    userDetail.blog?.let {
+    userDetail.blogUrl?.let {
         add(
             Triple(
                 first = {
@@ -368,10 +368,10 @@ fun ResultStatePreview() {
                 followingCount = 7,
                 followersCount = 1000,
                 photoUrl = "",
-                company = "Company",
+                organizations = "Company",
                 location = "Amsterdam, Netherlands",
-                twitter = "ali-star",
-                blog = "alimohsenirad.ir"
+                twitterUsername = "ali-star",
+                blogUrl = "alimohsenirad.ir"
             )
             ResultState(userDetail = userDetail)
         }
