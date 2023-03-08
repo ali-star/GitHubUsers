@@ -2,7 +2,6 @@ package alistar.sample.data.repository
 
 import alistar.sample.data.repository.datasource.GitHubDataSource
 import alistar.sample.data.repository.model.RepoUserDetail
-import alistar.sample.githubusers.domain.Result
 import alistar.sample.githubusers.domain.model.UserDetail
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.dsl.GIVEN
@@ -46,7 +45,8 @@ class GitHubRepositoryImplTest : TestCase() {
 
         private val gitHubDataSource: GitHubDataSource = mockk()
         private val gitHubRepository = GitHubRepositoryImpl(gitHubDataSource)
-        private lateinit var getUserDetailResultList: List<Result<UserDetail>>
+        private lateinit var getUserDetailResultList: List<UserDetail>
+        private var testException: TestException? = null
 
         fun mockSuccessfulGetUserDetail() {
             coEvery { gitHubDataSource.getUserDetail(any()) } answers {
@@ -69,19 +69,19 @@ class GitHubRepositoryImplTest : TestCase() {
         }
 
         fun callGetUserDetail() = runBlocking {
-            getUserDetailResultList = gitHubRepository.getUserDetail("ali-star").toList()
+            try {
+                getUserDetailResultList = gitHubRepository.getUserDetail("ali-star").toList()
+            } catch (e: TestException) {
+                testException = e
+            }
         }
 
         fun checkUserDetailSuccessfulResult() {
-            assertEquals(2, getUserDetailResultList.size)
-            assertTrue(getUserDetailResultList[0] is Result.Loading)
-            assertTrue(getUserDetailResultList[1] is Result.Success)
+            assertTrue(getUserDetailResultList.isNotEmpty())
         }
 
-        fun checkUserDetailFailureResult() {
-            assertEquals(2, getUserDetailResultList.size)
-            assertTrue(getUserDetailResultList[0] is Result.Loading)
-            assertTrue(getUserDetailResultList[1] is Result.Error)
+        fun checkUserDetailFailureResult() = runBlocking {
+            assertTrue(testException != null)
         }
     }
 }
