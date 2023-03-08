@@ -40,7 +40,7 @@ class SearchScreenTest {
             AND { createSearchScreen() }
             AND { search("user") }
             THEN { checkSearchBarIsDisplayed() }
-            AND { waitForIt { checkLoadingStateIsDisplayed() } }
+            AND { waitTillLoadingStateIsDisplayed() }
         }
     }
 
@@ -53,8 +53,8 @@ class SearchScreenTest {
             AND { createSearchScreen() }
             AND { search("user") }
             THEN { checkSearchBarIsDisplayed() }
-            AND { waitForIt { checkUsersListStateIsDisplayed() } }
-            AND { waitForIt { clickOnUser() } }
+            AND { waitTillUsersListStateIsDisplayed() }
+            AND { clickOnUser() }
             AND { checkNavigateToUserDetailCalled() }
         }
     }
@@ -67,7 +67,7 @@ class SearchScreenTest {
             AND { createSearchScreen() }
             AND { search("user") }
             THEN { checkSearchBarIsDisplayed() }
-            AND { waitForIt { checkUsersNotFoundStateIsDisplayed() } }
+            AND { waitTillUsersNotFoundStateIsDisplayed() }
         }
     }
 
@@ -79,7 +79,7 @@ class SearchScreenTest {
             AND { createSearchScreen() }
             AND { search("user") }
             THEN { checkSearchBarIsDisplayed() }
-            AND { waitForIt { checkErrorStateIsDisplayed() } }
+            AND { waitTillErrorStateIsDisplayed() }
         }
     }
 
@@ -91,7 +91,7 @@ class SearchScreenTest {
             AND { createSearchScreen() }
             AND { search("user") }
             THEN { checkSearchBarIsDisplayed() }
-            AND { waitForIt { checkListWithErrorStateIsDisplayed() } }
+            AND { checkListWithErrorStateIsDisplayed() }
         }
     }
 }
