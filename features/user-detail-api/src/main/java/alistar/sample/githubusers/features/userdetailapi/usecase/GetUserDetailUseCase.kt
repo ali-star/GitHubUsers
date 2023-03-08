@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetUserDetailUserCase @Inject constructor(
+class GetUserDetailUseCase @Inject constructor(
     private val getUserDetailInteractor: GetUserDetailInteractor
 ) {
 

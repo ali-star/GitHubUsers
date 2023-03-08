@@ -6,8 +6,8 @@ data class UserDetailItem(
     val photoUrl: String,
     val followersCount: Int,
     val followingCount: Int,
-    val company: String?,
+    val organizations: String?,
     val location: String?,
-    val twitter: String?,
-    val blog: String?
+    val twitterUsername: String?,
+    val blogUrl: String?
 )

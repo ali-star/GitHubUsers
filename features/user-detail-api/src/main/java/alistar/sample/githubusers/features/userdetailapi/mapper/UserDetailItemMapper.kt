@@ -9,8 +9,8 @@ fun UserDetail.toView(): UserDetailItem = UserDetailItem(
     photoUrl = photoUrl,
     followersCount = followersCount,
     followingCount = followingCount,
-    company = organizations,
+    organizations = organizations,
     location = location,
-    twitter = twitterUsername,
-    blog = blogUrl
+    twitterUsername = twitterUsername,
+    blogUrl = blogUrl
 )
