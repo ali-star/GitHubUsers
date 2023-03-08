@@ -2,7 +2,7 @@ package alistar.sample.githubusers.features.userdetail.presentation
 
 import alistar.sample.githubusers.features.userdetail.exception.MissingUsernameException
 import alistar.sample.githubusers.features.userdetailapi.presentation.UserDetailViewModel
-import alistar.sample.githubusers.features.userdetailapi.usecase.GetUserDetailUserCase
+import alistar.sample.githubusers.features.userdetailapi.usecase.GetUserDetailUseCase
 import alistar.sample.githubusers.libraries.navigation.DestinationArgs
 import alistar.sample.githubusers.libraries.core.result.Result
 import androidx.lifecycle.SavedStateHandle
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class UserDetailScreenViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getUserDetailUseCase: GetUserDetailUserCase
+    private val getUserDetailUseCase: GetUserDetailUseCase
 ) : UserDetailViewModel() {
 
     override val username: String = savedStateHandle.get<String>(DestinationArgs.USERNAME)
