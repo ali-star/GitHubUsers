@@ -6,15 +6,9 @@ import alistar.sample.githubusers.features.searchapi.model.UserItem
 import alistar.sample.githubusers.features.searchapi.usecase.SearchUsersUseCase
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.exception.TestException
-import alistar.sample.githubusers.libraries.test.extensions.waitForIt
 import androidx.compose.material.Surface
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import androidx.compose.ui.test.onNodeWithContentDescription
-import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performClick
-import androidx.compose.ui.test.performTextInput
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingSource
@@ -26,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flowOn
 
+@OptIn(ExperimentalTestApi::class)
 class SearchScreenRobot(private val composeContentTestRule: ComposeContentTestRule) : BaseRobot() {
 
     private val searchUsersUseCase: SearchUsersUseCase = mockk()
@@ -87,21 +82,35 @@ class SearchScreenRobot(private val composeContentTestRule: ComposeContentTestRu
         composeContentTestRule.onNodeWithTag("searchTextField").performTextInput(text)
     }
 
-    fun checkLoadingStateIsDisplayed() {
-        composeContentTestRule.onNodeWithTag("usersListPlaceHolder").assertIsDisplayed()
+    fun waitTillLoadingStateIsDisplayed() {
+        composeContentTestRule.waitUntilExactlyOneExists(
+            matcher = hasTestTag("usersListPlaceHolder"),
+            timeoutMillis = 5000,
+        )
     }
 
-    fun checkUsersListStateIsDisplayed() {
-        composeContentTestRule.onNodeWithTag("usersList").assertIsDisplayed()
+    fun waitTillUsersListStateIsDisplayed() {
+        composeContentTestRule.waitUntilExactlyOneExists(
+            matcher = hasTestTag("usersList"),
+            timeoutMillis = 5000,
+        )
     }
 
-    fun checkUsersNotFoundStateIsDisplayed() {
+    fun waitTillUsersNotFoundStateIsDisplayed() {
+        composeContentTestRule.waitUntilExactlyOneExists(
+            matcher = hasTestTag("usersNotFoundState"),
+            timeoutMillis = 5000,
+        )
         composeContentTestRule.onNodeWithContentDescription("noUsersFoundPlaceHolderImage")
             .assertIsDisplayed()
         composeContentTestRule.onNodeWithText("No users found").assertIsDisplayed()
     }
 
-    fun checkErrorStateIsDisplayed() {
+    fun waitTillErrorStateIsDisplayed() {
+        composeContentTestRule.waitUntilExactlyOneExists(
+            matcher = hasTestTag("errorState"),
+            timeoutMillis = 5000,
+        )
         composeContentTestRule.onNodeWithText("Error").assertIsDisplayed()
         composeContentTestRule.onNodeWithText("Please check your internet connection")
             .assertIsDisplayed()
@@ -109,7 +118,10 @@ class SearchScreenRobot(private val composeContentTestRule: ComposeContentTestRu
     }
 
     fun checkListWithErrorStateIsDisplayed() {
-        composeContentTestRule.onNodeWithText("Error getting new users").assertIsDisplayed()
+        composeContentTestRule.waitUntilExactlyOneExists(
+            matcher = hasText("Error getting new users"),
+            timeoutMillis = 5000,
+        )
     }
 
     fun clickOnUser() {
@@ -118,12 +130,6 @@ class SearchScreenRobot(private val composeContentTestRule: ComposeContentTestRu
 
     fun checkNavigateToUserDetailCalled() {
         verify { navigateToUserDetail(any()) }
-    }
-
-    fun waitForIt(timeout: Long = 5000, block: () -> Unit) {
-        composeContentTestRule.waitForIt(timeout) {
-            block()
-        }
     }
 
     private class TestPagingSource(
