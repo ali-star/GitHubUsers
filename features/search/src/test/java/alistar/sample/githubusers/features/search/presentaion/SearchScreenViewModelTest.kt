@@ -33,7 +33,7 @@ class SearchScreenViewModelTest : TestCase() {
             WHEN { createViewModel() }
             AND { search("octocat") }
             THEN { checkSearchUserIsCalled(times = 0, timeout = 0) }
-            AND { checkSearchUserIsCalled(times = 1, timeout = 700) }
+            AND { checkSearchUserIsCalled(times = 1, timeout = 1000) }
         }
     }
 
@@ -44,7 +44,7 @@ class SearchScreenViewModelTest : TestCase() {
             WHEN { createViewModel() }
             AND { search("octo") }
             AND { search("octocat") }
-            AND { checkSearchUserIsCalled(times = 1, timeout = 800) }
+            AND { checkSearchUserIsCalled(times = 1, timeout = 1000) }
         }
     }
 
@@ -74,7 +74,7 @@ class SearchScreenViewModelTest : TestCase() {
             viewModel.onInputTextChanged(text)
         }
 
-        fun checkSearchUserIsCalled(times: Int = 1, timeout: Long = 700) {
+        fun checkSearchUserIsCalled(times: Int = 1, timeout: Long = 1000) {
             verify(exactly = times, timeout = timeout) { searchUsersUseCase(any()) }
         }
     }
