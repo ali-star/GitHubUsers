@@ -5,9 +5,6 @@ Sample app for searching github users.
 
 This application is using the latest tools and libraries with Hexagonal Architecture + MVI pattern.
 
-## ⚠️ Note
-Before running the project please create a file named `githubauth.properties` inside the root project and add your username (username) and github personal access token (token) in it, these properties are used in the [remote module gradle build file](https://github.com/ali-star/GitHubUsers/blob/master/data/remote/build.gradle.kts)
-
 ## ⚒️ Tools
 
 ### 🧑🏻‍💻 Development
