@@ -94,6 +94,11 @@ class SearchScreenRobot(private val composeContentTestRule: ComposeContentTestRu
             matcher = hasTestTag("usersList"),
             timeoutMillis = 5000,
         )
+        // also waiting for list items to be shown
+        composeContentTestRule.waitUntilExactlyOneExists(
+            matcher = hasText("User 1"),
+            timeoutMillis = 5000,
+        )
     }
 
     fun waitTillUsersNotFoundStateIsDisplayed() {
