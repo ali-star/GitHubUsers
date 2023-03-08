@@ -33,6 +33,11 @@ android {
             isReturnDefaultValues = true
         }
     }
+    lint {
+        abortOnError = false
+        htmlOutput = file("${rootProject.rootDir}/build/reports/${project.name}-lint.html")
+        lintConfig = file("${rootProject.rootDir}/config/gradle/lint.xml")
+    }
     namespace = "alistar.sample.githubusers"
 }
 
