@@ -47,6 +47,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
@@ -125,7 +126,9 @@ internal fun UserDetailScaffold(
 @Composable
 private fun LoadingState() {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag("loadingState"),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(
@@ -190,7 +193,9 @@ private fun ResultState(
     actions: UserDetailScreenActions = UserDetailScreenActions()
 ) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .testTag("resultState"),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
@@ -199,7 +204,7 @@ private fun ResultState(
                 .clip(CircleShape)
                 .background(color = MaterialTheme.colors.onSecondary),
             painter = rememberAsyncImagePainter(model = userDetail.photoUrl),
-            contentDescription = ""
+            contentDescription = "avatarImage"
         )
         Text(
             modifier = Modifier.padding(top = 16.dp),
@@ -287,13 +292,13 @@ private fun userInfoItems(
     userDetail: UserDetailItem,
     actions: UserDetailScreenActions
 ): List<Triple<@Composable () -> Unit, String, () -> Unit>> = buildList {
-    userDetail.company?.let {
+    userDetail.organizations?.let {
         add(
             Triple(
                 first = {
                     Icon(
                         imageVector = Icons.Outlined.Business,
-                        contentDescription = "company",
+                        contentDescription = "organizations",
                         tint = MaterialTheme.colors.onBackground
                     )
                 },
@@ -317,7 +322,7 @@ private fun userInfoItems(
             )
         )
     }
-    userDetail.twitter?.let {
+    userDetail.twitterUsername?.let {
         add(
             Triple(
                 first = {
@@ -334,7 +339,7 @@ private fun userInfoItems(
             )
         )
     }
-    userDetail.blog?.let {
+    userDetail.blogUrl?.let {
         add(
             Triple(
                 first = {
@@ -368,10 +373,10 @@ fun ResultStatePreview() {
                 followingCount = 7,
                 followersCount = 1000,
                 photoUrl = "",
-                company = "Company",
+                organizations = "Company",
                 location = "Amsterdam, Netherlands",
-                twitter = "ali-star",
-                blog = "alimohsenirad.ir"
+                twitterUsername = "ali-star",
+                blogUrl = "alimohsenirad.ir"
             )
             ResultState(userDetail = userDetail)
         }
