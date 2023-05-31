@@ -2,7 +2,6 @@ package alistar.sample.data.repository
 
 import alistar.sample.data.repository.datasource.GitHubDataSource
 import alistar.sample.data.repository.model.RepoUserDetail
-import alistar.sample.githubusers.domain.Result
 import alistar.sample.githubusers.domain.model.UserDetail
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.dsl.GIVEN
@@ -15,6 +14,7 @@ import io.mockk.mockk
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -23,6 +23,11 @@ import org.robolectric.RobolectricTestRunner
 class GitHubRepositoryImplTest : TestCase() {
 
     private val robot = Robot()
+
+    @Before
+    fun setup() {
+        robot.setup()
+    }
 
     @Test
     fun test_successful_getUserDetail() {
@@ -46,7 +51,13 @@ class GitHubRepositoryImplTest : TestCase() {
 
         private val gitHubDataSource: GitHubDataSource = mockk()
         private val gitHubRepository = GitHubRepositoryImpl(gitHubDataSource)
-        private lateinit var getUserDetailResultList: List<Result<UserDetail>>
+        private lateinit var getUserDetailResultList: List<UserDetail>
+        private var testExceptionThrown = false
+
+        override fun setup() {
+            super.setup()
+            testExceptionThrown = false
+        }
 
         fun mockSuccessfulGetUserDetail() {
             coEvery { gitHubDataSource.getUserDetail(any()) } answers {
@@ -59,7 +70,7 @@ class GitHubRepositoryImplTest : TestCase() {
                     company = "organization",
                     location = "Amsterdam, Netherlands",
                     twitterUsername = "@ali-star",
-                    blog = "alimohsenirad.ir"
+                    blog = "alimohsenirad.ir",
                 )
             }
         }
@@ -69,19 +80,20 @@ class GitHubRepositoryImplTest : TestCase() {
         }
 
         fun callGetUserDetail() = runBlocking {
-            getUserDetailResultList = gitHubRepository.getUserDetail("ali-star").toList()
+            try {
+                getUserDetailResultList = gitHubRepository.getUserDetail("ali-star").toList()
+            } catch (ignored: TestException) {
+                testExceptionThrown = true
+            }
         }
 
         fun checkUserDetailSuccessfulResult() {
-            assertEquals(2, getUserDetailResultList.size)
-            assertTrue(getUserDetailResultList[0] is Result.Loading)
-            assertTrue(getUserDetailResultList[1] is Result.Success)
+            assertEquals(1, getUserDetailResultList.size)
+            assertTrue(!testExceptionThrown)
         }
 
         fun checkUserDetailFailureResult() {
-            assertEquals(2, getUserDetailResultList.size)
-            assertTrue(getUserDetailResultList[0] is Result.Loading)
-            assertTrue(getUserDetailResultList[1] is Result.Error)
+            assertTrue(testExceptionThrown)
         }
     }
 }

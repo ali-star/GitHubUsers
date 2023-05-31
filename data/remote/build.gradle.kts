@@ -10,23 +10,12 @@ plugins {
 }
 
 android {
-    /*
-     * Please create a file named githubauth.properties inside the root project
-     * and add your username (username) and github personal access token (token) in it.
-     */
-    val authProperties = Properties().apply {
-        load(FileInputStream(File(rootProject.rootDir, "githubauth.properties")))
-    }
     buildTypes {
         getByName("debug") {
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
-            buildConfigField("String", "USERNAME", authProperties.getProperty("username"))
-            buildConfigField("String", "TOKEN", authProperties.getProperty("token"))
         }
         getByName("release") {
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
-            buildConfigField("String", "USERNAME", authProperties.getProperty("username"))
-            buildConfigField("String", "TOKEN", authProperties.getProperty("token"))
         }
     }
 }

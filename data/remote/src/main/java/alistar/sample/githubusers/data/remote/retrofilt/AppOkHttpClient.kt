@@ -17,8 +17,6 @@ class AppOkHttpClient {
             )
         }
 
-        clientBuilder.addInterceptor(BasicAuthInterceptor(BuildConfig.USERNAME, BuildConfig.TOKEN))
-
         return clientBuilder.build()
     }
 }
