@@ -2,7 +2,6 @@ package alistar.sample.data.repository
 
 import alistar.sample.data.repository.datasource.GitHubDataSource
 import alistar.sample.data.repository.model.RepoUserDetail
-import alistar.sample.githubusers.libraries.core.result.Result
 import alistar.sample.githubusers.domain.model.UserDetail
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.dsl.GIVEN
@@ -11,10 +10,8 @@ import alistar.sample.githubusers.libraries.test.dsl.THEN
 import alistar.sample.githubusers.libraries.test.dsl.WHEN
 import alistar.sample.githubusers.libraries.test.exception.TestException
 import io.mockk.coEvery
-import io.mockk.coVerify
 import io.mockk.mockk
 import junit.framework.TestCase
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
