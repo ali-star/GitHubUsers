@@ -6,6 +6,8 @@ plugins {
 }
 
 android {
+    namespace = "alistar.sample.githubusers.data.remote"
+
     buildTypes {
         getByName("debug") {
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
@@ -13,6 +15,9 @@ android {
         getByName("release") {
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
         }
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 

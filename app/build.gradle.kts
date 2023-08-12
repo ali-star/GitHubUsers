@@ -1,3 +1,5 @@
+import java.util.Locale
+
 plugins {
     id("githubusers.android.application")
     id("githubusers.android.application.compose")
@@ -6,13 +8,18 @@ plugins {
 
 android {
     defaultConfig {
+        namespace = "alistar.sample.githubusers"
         applicationId = "alistar.sample.githubusers"
         versionCode = 1
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        setProperty("archivesBaseName", "${parent?.name?.capitalize()}-$versionName")
+        setProperty("archivesBaseName", "${parent?.name?.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.getDefault()
+            ) else it.toString()
+        }}-$versionName")
     }
 
     buildTypes {
@@ -22,23 +29,18 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
             isReturnDefaultValues = true
         }
     }
+
     lint {
         abortOnError = false
         htmlOutput = file("${rootProject.rootDir}/build/reports/${project.name}-lint.html")
         lintConfig = file("${rootProject.rootDir}/config/gradle/lint.xml")
     }
-    namespace = "alistar.sample.githubusers"
 }
 
 dependencies {
