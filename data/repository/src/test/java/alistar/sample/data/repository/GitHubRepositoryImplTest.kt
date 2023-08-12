@@ -14,6 +14,7 @@ import io.mockk.mockk
 import junit.framework.TestCase
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -22,6 +23,11 @@ import org.robolectric.RobolectricTestRunner
 class GitHubRepositoryImplTest : TestCase() {
 
     private val robot = Robot()
+
+    @Before
+    fun setup() {
+        robot.setup()
+    }
 
     @Test
     fun test_successful_getUserDetail() {
@@ -46,7 +52,12 @@ class GitHubRepositoryImplTest : TestCase() {
         private val gitHubDataSource: GitHubDataSource = mockk()
         private val gitHubRepository = GitHubRepositoryImpl(gitHubDataSource)
         private lateinit var getUserDetailResultList: List<UserDetail>
-        private var testException: TestException? = null
+        private var testExceptionThrown = false
+
+        override fun setup() {
+            super.setup()
+            testExceptionThrown = false
+        }
 
         fun mockSuccessfulGetUserDetail() {
             coEvery { gitHubDataSource.getUserDetail(any()) } answers {
@@ -59,7 +70,7 @@ class GitHubRepositoryImplTest : TestCase() {
                     company = "organization",
                     location = "Amsterdam, Netherlands",
                     twitterUsername = "@ali-star",
-                    blog = "alimohsenirad.ir"
+                    blog = "alimohsenirad.ir",
                 )
             }
         }
@@ -71,17 +82,18 @@ class GitHubRepositoryImplTest : TestCase() {
         fun callGetUserDetail() = runBlocking {
             try {
                 getUserDetailResultList = gitHubRepository.getUserDetail("ali-star").toList()
-            } catch (e: TestException) {
-                testException = e
+            } catch (ignored: TestException) {
+                testExceptionThrown = true
             }
         }
 
         fun checkUserDetailSuccessfulResult() {
-            assertTrue(getUserDetailResultList.isNotEmpty())
+            assertEquals(1, getUserDetailResultList.size)
+            assertTrue(!testExceptionThrown)
         }
 
-        fun checkUserDetailFailureResult() = runBlocking {
-            assertTrue(testException != null)
+        fun checkUserDetailFailureResult() {
+            assertTrue(testExceptionThrown)
         }
     }
 }
