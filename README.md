@@ -38,7 +38,7 @@ This project is based on the [Hexagonal Architecture](https://alistair.cockburn.
   environment and starts the _Jetpack Navigation Compose Graph_.
 * **features** - The module/folder containing all the features (visual or not) from the application
   * **search-api** - Search feature **port**.
-  * **search** - Search screen of the application used for seaching users the **adapter** for the search-api.
+  * **search** - Search screen of the application used for searching users the **adapter** for the search-api.
   * **user-detail-api** - User detail feature **port**.
   * **user-detail** - User detail screen to show user detailed info and the **adapter** for the user-detail-api.
 * **domain** - The modules containing the most important part of the application: the business

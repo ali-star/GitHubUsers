@@ -1,7 +1,3 @@
-import java.io.File
-import java.io.FileInputStream
-import java.util.Properties
-
 plugins {
     id("githubusers.android.library")
     id("githubusers.android.hilt")
@@ -10,6 +6,8 @@ plugins {
 }
 
 android {
+    namespace = "alistar.sample.githubusers.data.remote"
+
     buildTypes {
         getByName("debug") {
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
@@ -17,6 +15,9 @@ android {
         getByName("release") {
             buildConfigField("String", "BASE_URL", "\"https://api.github.com/\"")
         }
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 

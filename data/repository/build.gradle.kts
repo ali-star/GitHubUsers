@@ -4,6 +4,10 @@ plugins {
     id("githubusers.test")
 }
 
+android {
+    namespace = "alistar.sample.githubusers.data.repository"
+}
+
 dependencies {
     implementation(project(":domain"))
     implementation(project(":libraries:core"))

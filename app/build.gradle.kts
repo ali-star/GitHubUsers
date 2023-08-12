@@ -1,3 +1,5 @@
+import java.util.Locale
+
 plugins {
     id("githubusers.android.application")
     id("githubusers.android.application.compose")
@@ -12,7 +14,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        setProperty("archivesBaseName", "${parent?.name?.capitalize()}-$versionName")
+        setProperty("archivesBaseName", "${parent?.name?.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.getDefault()
+            ) else it.toString()
+        }}-$versionName")
     }
 
     buildTypes {
@@ -20,11 +26,6 @@ android {
             isMinifyEnabled = true
             proguardFiles("proguard-rules.pro")
         }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     testOptions {

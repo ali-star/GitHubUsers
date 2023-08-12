@@ -1,6 +1,6 @@
 package alistar.sample.githubusers.features.search.presentation.ui
 
-import alistar.sample.githubusers.features.search.R
+import alistar.sample.githubusers.feature.search.R
 import alistar.sample.githubusers.libraries.design.theme.GitHubUsersTheme
 import alistar.sample.githubusers.libraries.design.theme.HintColor
 import alistar.sample.githubusers.libraries.design.utils.isKeyboardOpen
