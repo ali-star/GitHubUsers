@@ -4,6 +4,13 @@ plugins {
     id("githubusers.test")
 }
 
+android {
+    namespace = "alistar.sample.githubusers.libraries.core"
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
 dependencies {
     implementation(libs.android.material)
     implementation(libs.kotlinx.coroutines.core)

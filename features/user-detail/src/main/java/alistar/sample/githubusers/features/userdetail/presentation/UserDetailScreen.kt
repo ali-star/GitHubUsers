@@ -2,7 +2,7 @@
 
 package alistar.sample.githubusers.features.userdetail.presentation
 
-import alistar.sample.githubusers.features.userdetail.R
+import alistar.sample.githubusers.feature.userdetail.R
 import alistar.sample.githubusers.features.userdetailapi.item.UserDetailItem
 import alistar.sample.githubusers.features.userdetail.presentation.ui.TopBar
 import alistar.sample.githubusers.libraries.core.extensions.toQuantityString

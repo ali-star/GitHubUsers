@@ -1,6 +1,6 @@
 package alistar.sample.githubusers.features.search.presentation
 
-import alistar.sample.githubusers.features.search.R
+import alistar.sample.githubusers.feature.search.R
 import alistar.sample.githubusers.features.search.presentation.ui.SearchBar
 import alistar.sample.githubusers.features.search.presentation.ui.UserPlaceHolder
 import alistar.sample.githubusers.features.searchapi.model.UserItem
@@ -66,7 +66,6 @@ import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import coil.compose.rememberImagePainter
 import alistar.sample.githubusers.libraries.design.R as DesignResource
 
@@ -259,7 +258,7 @@ private fun InitialState(
     modifier: Modifier = Modifier,
     startSearch: () -> Unit = {},
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = modifier.fillMaxSize()) {
         Image(
             modifier = Modifier.align(Alignment.Center),
             painter = painterResource(id = DesignResource.drawable.ic_github),
@@ -317,7 +316,8 @@ private fun UsersList(
             state = lazyListState,
             contentPadding = contentPadding
         ) {
-            items(items) { item ->
+            items(items.itemCount) { index ->
+                val item = items[index]
                 if (item == null) {
                     UserPlaceHolder()
                 } else {
