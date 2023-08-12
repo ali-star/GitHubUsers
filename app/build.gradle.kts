@@ -8,6 +8,7 @@ plugins {
 
 android {
     defaultConfig {
+        namespace = "alistar.sample.githubusers"
         applicationId = "alistar.sample.githubusers"
         versionCode = 1
         versionName = "1.0.0"
@@ -40,7 +41,6 @@ android {
         htmlOutput = file("${rootProject.rootDir}/build/reports/${project.name}-lint.html")
         lintConfig = file("${rootProject.rootDir}/config/gradle/lint.xml")
     }
-    namespace = "alistar.sample.githubusers"
 }
 
 dependencies {
