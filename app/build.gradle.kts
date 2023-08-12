@@ -33,6 +33,7 @@ android {
             isReturnDefaultValues = true
         }
     }
+
     lint {
         abortOnError = false
         htmlOutput = file("${rootProject.rootDir}/build/reports/${project.name}-lint.html")
