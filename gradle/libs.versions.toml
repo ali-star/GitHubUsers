@@ -45,8 +45,8 @@ mockWebServer = "4.9.3"
 room = "2.5.2"
 paging = "3.2.0"
 pagingCompose = "3.2.0"
-mockk = "1.12.2"
-robolectric = "4.9.2"
+mockk = "1.13.5"
+robolectric = "4.10.3"
 
 [libraries]
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" }
