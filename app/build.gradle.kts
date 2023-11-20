@@ -53,6 +53,7 @@ dependencies {
     implementation(project(":features:user-detail"))
     implementation(project(":data:repository"))
     implementation(project(":data:remote"))
+    testImplementation("com.lemonappdev:konsist:0.13.0")
     implementation(libs.hilt.android)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.hilt.navigation.compose)

@@ -1,6 +1,6 @@
 package alistar.sample.githubusers.data.remote.di
 
-import alistar.sample.data.repository.datasource.GitHubDataSource
+import alistar.sample.githubusers.data.repository.datasource.GitHubDataSource
 import alistar.sample.githubusers.data.remote.api.Apis
 import alistar.sample.githubusers.data.remote.datasource.GitHubDataSourceImpl
 import dagger.Module

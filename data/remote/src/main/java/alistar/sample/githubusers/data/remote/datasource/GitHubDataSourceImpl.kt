@@ -1,8 +1,8 @@
 package alistar.sample.githubusers.data.remote.datasource
 
-import alistar.sample.data.repository.datasource.GitHubDataSource
-import alistar.sample.data.repository.model.RepoUser
-import alistar.sample.data.repository.model.RepoUserDetail
+import alistar.sample.githubusers.data.repository.datasource.GitHubDataSource
+import alistar.sample.githubusers.data.repository.model.RepoUser
+import alistar.sample.githubusers.data.repository.model.RepoUserDetail
 import alistar.sample.githubusers.data.remote.api.Apis
 import alistar.sample.githubusers.data.remote.mapper.toRepo
 import androidx.paging.PagingSource

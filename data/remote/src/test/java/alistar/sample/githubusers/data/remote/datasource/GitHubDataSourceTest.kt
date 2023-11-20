@@ -1,7 +1,7 @@
 package alistar.sample.githubusers.data.remote.datasource
 
-import alistar.sample.data.repository.datasource.GitHubDataSource
-import alistar.sample.data.repository.model.RepoUserDetail
+import alistar.sample.githubusers.data.repository.datasource.GitHubDataSource
+import alistar.sample.githubusers.data.repository.model.RepoUserDetail
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.dsl.GIVEN
 import alistar.sample.githubusers.libraries.test.dsl.RUN_UI_TEST

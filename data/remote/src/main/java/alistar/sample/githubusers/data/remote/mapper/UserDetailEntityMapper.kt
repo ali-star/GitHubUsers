@@ -1,6 +1,6 @@
 package alistar.sample.githubusers.data.remote.mapper
 
-import alistar.sample.data.repository.model.RepoUserDetail
+import alistar.sample.githubusers.data.repository.model.RepoUserDetail
 import alistar.sample.githubusers.data.remote.entity.UserDetailEntity
 
 fun UserDetailEntity.toRepo(): RepoUserDetail = RepoUserDetail(

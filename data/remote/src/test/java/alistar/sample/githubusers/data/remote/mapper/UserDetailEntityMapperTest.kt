@@ -1,6 +1,6 @@
 package alistar.sample.githubusers.data.remote.mapper
 
-import alistar.sample.data.repository.model.RepoUserDetail
+import alistar.sample.githubusers.data.repository.model.RepoUserDetail
 import alistar.sample.githubusers.data.remote.entity.UserDetailEntity
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.dsl.AND
