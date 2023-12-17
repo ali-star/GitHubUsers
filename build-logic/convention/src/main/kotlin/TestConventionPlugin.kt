@@ -23,6 +23,7 @@ class TestConventionPlugin : Plugin<Project> {
                 add("testImplementation", libs.findLibrary("robolectric.unit").get())
                 add("testImplementation", libs.findLibrary("androidx.test.runner").get())
                 add("testImplementation", libs.findLibrary("androidx.test.core").get())
+                add("testImplementation", libs.findLibrary("kotlinx.coroutines.test").get())
             }
         }
     }

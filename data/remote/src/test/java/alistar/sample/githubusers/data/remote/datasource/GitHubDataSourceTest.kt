@@ -11,8 +11,7 @@ import alistar.sample.githubusers.libraries.test.extensions.enqueueResponse
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
-import junit.framework.TestCase
-import kotlinx.coroutines.runBlocking
+import junit.framework.TestCase.assertEquals
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.Before
 import org.junit.Rule
@@ -25,7 +24,7 @@ import javax.inject.Inject
 @HiltAndroidTest
 @RunWith(RobolectricTestRunner::class)
 @Config(application = HiltTestApplication::class)
-class GitHubDataSourceTest : TestCase() {
+class GitHubDataSourceTest {
 
     @get:Rule
     val hiltRule = HiltAndroidRule(this)
@@ -45,12 +44,10 @@ class GitHubDataSourceTest : TestCase() {
     }
 
     @Test
-    fun test_getUserDetail() {
-        RUN_UI_TEST(robot) {
-            GIVEN { mockUserDetailApi() }
-            WHEN { callGetUserDetail() }
-            THEN { checkGetUserDetailResult() }
-        }
+    fun test_getUserDetail() = RUN_UI_TEST(robot) {
+        GIVEN { mockUserDetailApi() }
+        WHEN { callGetUserDetail() }
+        THEN { checkGetUserDetailResult() }
     }
 
     private class Robot(
@@ -61,10 +58,10 @@ class GitHubDataSourceTest : TestCase() {
         private lateinit var user: RepoUserDetail
 
         fun mockUserDetailApi() {
-            mockWebServer.enqueueResponse(fileName = "get-user-200.json", 200)
+            mockWebServer.enqueueResponse(fileName = "get-user-200.json", code =200)
         }
 
-        fun callGetUserDetail() = runBlocking {
+        suspend fun callGetUserDetail() {
             user = gitHubDataSource.getUserDetail("ali-star")
         }
 

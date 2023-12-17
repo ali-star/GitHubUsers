@@ -35,41 +35,35 @@ class SearchBarTest {
     private val robot = Robot(composeTestRule)
 
     @Test
-    fun test_unFocused() {
-        RUN_UI_TEST(robot) {
-            GIVEN { requestFocus = false }
-            WHEN { createSearchBar() }
-            THEN { checkSearchIconIsDisplayed() }
-            AND { checkHintIsDisplayed() }
-            AND { checkGitHubIconIsDisplayed() }
-            AND { checkClearIconsIsNotDisplayed() }
-        }
+    fun test_unFocused() = RUN_UI_TEST(robot) {
+        GIVEN { requestFocus = false }
+        WHEN { createSearchBar() }
+        THEN { checkSearchIconIsDisplayed() }
+        AND { checkHintIsDisplayed() }
+        AND { checkGitHubIconIsDisplayed() }
+        AND { checkClearIconsIsNotDisplayed() }
     }
 
     @Test
-    fun test_focused() {
-        RUN_UI_TEST(robot) {
-            GIVEN { requestFocus = true }
-            WHEN { createSearchBar() }
-            THEN { checkSearchIconIsDisplayed() }
-            AND { checkHintIsNotDisplayed() }
-            AND { checkGitHubIconIsNotDisplayed() }
-            AND { checkClearIconsIsDisplayed() }
-        }
+    fun test_focused() = RUN_UI_TEST(robot) {
+        GIVEN { requestFocus = true }
+        WHEN { createSearchBar() }
+        THEN { checkSearchIconIsDisplayed() }
+        AND { checkHintIsNotDisplayed() }
+        AND { checkGitHubIconIsNotDisplayed() }
+        AND { checkClearIconsIsDisplayed() }
     }
 
     @Test
-    fun test_focusedWithText() {
-        RUN_UI_TEST(robot) {
-            GIVEN { requestFocus = true }
-            WHEN { createSearchBar() }
-            AND { enterText("ali") }
-            THEN { checkSearchIconIsDisplayed() }
-            AND { checkHintIsNotDisplayed() }
-            AND { checkGitHubIconIsNotDisplayed() }
-            AND { checkClearIconsIsDisplayed() }
-            AND { checkTextIsDisplayed("ali") }
-        }
+    fun test_focusedWithText() = RUN_UI_TEST(robot) {
+        GIVEN { requestFocus = true }
+        WHEN { createSearchBar() }
+        AND { enterText("ali") }
+        THEN { checkSearchIconIsDisplayed() }
+        AND { checkHintIsNotDisplayed() }
+        AND { checkGitHubIconIsNotDisplayed() }
+        AND { checkClearIconsIsDisplayed() }
+        AND { checkTextIsDisplayed("ali") }
     }
 
     private class Robot(private val composeContentTestRule: ComposeContentTestRule) : BaseRobot() {

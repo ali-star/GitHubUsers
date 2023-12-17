@@ -32,22 +32,18 @@ class TopBarTest {
     private val robot = Robot(composeTestRule)
 
     @Test
-    fun test_viewsAreDisplayed() {
-        RUN_UI_TEST(robot) {
-            GIVEN { createTopBar() }
-            THEN { checkTopBarIconIsDisplayed() }
-            AND { checkBackButtonIsDisplayed() }
-        }
+    fun test_viewsAreDisplayed() = RUN_UI_TEST(robot) {
+        GIVEN { createTopBar() }
+        THEN { checkTopBarIconIsDisplayed() }
+        AND { checkBackButtonIsDisplayed() }
     }
 
     @Test
-    fun test_backButtonWorks() {
-        RUN_UI_TEST(robot) {
-            GIVEN { createTopBar() }
-            AND { mockBackButtonAction() }
-            WHEN { checkClickOnBackButton() }
-            THEN { checkBackButtonWorks() }
-        }
+    fun test_backButtonWorks() = RUN_UI_TEST(robot) {
+        GIVEN { createTopBar() }
+        AND { mockBackButtonAction() }
+        WHEN { checkClickOnBackButton() }
+        THEN { checkBackButtonWorks() }
     }
 
     private class Robot(private val composeContentTestRule: ComposeContentTestRule) : BaseRobot() {
