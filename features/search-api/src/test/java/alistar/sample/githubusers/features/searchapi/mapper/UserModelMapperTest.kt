@@ -9,31 +9,29 @@ import alistar.sample.githubusers.libraries.test.dsl.GIVEN
 import alistar.sample.githubusers.libraries.test.dsl.RUN_UNIT_TEST
 import alistar.sample.githubusers.libraries.test.dsl.THEN
 import alistar.sample.githubusers.libraries.test.dsl.WHEN
-import junit.framework.TestCase
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
-class UserModelMapperTest : TestCase() {
+class UserModelMapperTest {
 
     private val robot = Robot()
 
     @Test
-    fun test_mapToView() {
-        RUN_UNIT_TEST(robot) {
-            GIVEN {
-                user = User(
-                    username = "ali-star",
-                    photoUrl = "photoUrl"
-                )
-            }
-            AND {
-                userModel = UserItem(
-                    username = "ali-star",
-                    photoUrl = "photoUrl"
-                )
-            }
-            WHEN { mapToDomain() }
-            THEN { checkUserMappedSuccessfully() }
+    fun test_mapToView() = RUN_UNIT_TEST(robot) {
+        GIVEN {
+            user = User(
+                username = "ali-star",
+                photoUrl = "photoUrl"
+            )
         }
+        AND {
+            userModel = UserItem(
+                username = "ali-star",
+                photoUrl = "photoUrl"
+            )
+        }
+        WHEN { mapToDomain() }
+        THEN { checkUserMappedSuccessfully() }
     }
 
     private class Robot : BaseRobot() {

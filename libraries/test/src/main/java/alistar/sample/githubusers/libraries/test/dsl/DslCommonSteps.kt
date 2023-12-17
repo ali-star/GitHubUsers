@@ -8,9 +8,9 @@ import alistar.sample.githubusers.libraries.test.BaseRobot
  * @return - robot instance of the test robot, it allows us to call robot methods directly
  */
 @Suppress("FunctionName")
-fun <T : BaseRobot> TestRun<T>.GIVEN(
-    block: T.() -> Unit
-): T = robot.apply(block)
+suspend fun <T : BaseRobot> TestRun<T>.GIVEN(
+    block: suspend T.() -> Unit
+): T = robot.apply { block() }
 
 /**
  * WHEN step for any test (Unit and Instrumentation)
@@ -18,9 +18,9 @@ fun <T : BaseRobot> TestRun<T>.GIVEN(
  * @return - robot instance of the unit test, it allows us to call robot methods directly
  */
 @Suppress("FunctionName")
-fun <T : BaseRobot> TestRun<T>.WHEN(
-    block: T.() -> Unit
-): T = robot.apply(block)
+suspend fun <T : BaseRobot> TestRun<T>.WHEN(
+    block: suspend T.() -> Unit
+): T = robot.apply { block() }
 
 /**
  * AND step for any test (Unit and Instrumentation)
@@ -28,9 +28,9 @@ fun <T : BaseRobot> TestRun<T>.WHEN(
  * @return - robot instance of the unit test, it allows us to call robot methods directly
  */
 @Suppress("FunctionName")
-fun <T : BaseRobot> TestRun<T>.AND(
-    block: T.() -> Unit
-): T = robot.apply(block)
+suspend fun <T : BaseRobot> TestRun<T>.AND(
+    block: suspend T.() -> Unit
+): T = robot.apply { block() }
 
 /**
  * THEN step for any test (Unit and Instrumentation)
@@ -38,9 +38,9 @@ fun <T : BaseRobot> TestRun<T>.AND(
  * @return - robot instance of the unit test, it allows us to call robot methods directly
  */
 @Suppress("FunctionName")
-fun <T : BaseRobot> TestRun<T>.THEN(
-    block: T.() -> Unit
-): T = robot.apply(block)
+suspend fun <T : BaseRobot> TestRun<T>.THEN(
+    block: suspend T.() -> Unit
+): T = robot.apply { block() }
 
 /**
  * Simple data class which represents the test it self. We can add as much properties we need

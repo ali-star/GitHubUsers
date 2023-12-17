@@ -9,5 +9,5 @@ interface GitHubRepository {
 
     fun searchUsers(query: String): Flow<PagingData<User>>
 
-    fun getUserDetail(username: String): Flow<UserDetail>
+    suspend fun getUserDetail(username: String): UserDetail
 }

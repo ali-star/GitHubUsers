@@ -11,15 +11,14 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 class GitHubRepositoryImpl(
-    private val gitHubDataSource: GitHubDataSource
+    private val gitHubDataSource: GitHubDataSource,
+    private val dispatcher: CoroutineContext = Dispatchers.IO
 ) : GitHubRepository {
-
-    private val ioDispatcher = Dispatchers.IO
 
     override fun searchUsers(query: String): Flow<PagingData<User>> =
         Pager(
@@ -27,8 +26,8 @@ class GitHubRepositoryImpl(
             pagingSourceFactory = { gitHubDataSource.searchUsers(query) }
         ).flow.map { data -> data.map { it.toDomain() } }
 
-    override fun getUserDetail(username: String): Flow<UserDetail> = flow {
+    override suspend fun getUserDetail(username: String): UserDetail = withContext(dispatcher) {
         val userDetail = gitHubDataSource.getUserDetail(username)
-        emit(userDetail.toDomain())
-    }.flowOn(ioDispatcher)
+        userDetail.toDomain()
+    }
 }

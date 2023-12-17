@@ -6,13 +6,13 @@ import alistar.sample.githubusers.features.userdetailapi.mapper.toView
 import alistar.sample.githubusers.libraries.core.result.Result
 import alistar.sample.githubusers.libraries.core.result.wrapToResult
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GetUserDetailUseCase @Inject constructor(
     private val getUserDetailInteractor: GetUserDetailInteractor
 ) {
 
-    operator fun invoke(username: String): Flow<Result<UserDetailItem>> =
-        getUserDetailInteractor(username).map { it.toView() }.wrapToResult()
+    operator fun invoke(username: String): Flow<Result<UserDetailItem>> = wrapToResult {
+        getUserDetailInteractor(username).toView()
+    }
 }
