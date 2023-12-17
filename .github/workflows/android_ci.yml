@@ -3,9 +3,9 @@ name: Android CI
 on:
   workflow_dispatch:
   push:
-    branches: [ $default-branch ]
+    branches: [ dev ]
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ dev ]
 
 jobs:
   build:
