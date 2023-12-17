@@ -8,46 +8,44 @@ import alistar.sample.githubusers.libraries.test.dsl.GIVEN
 import alistar.sample.githubusers.libraries.test.dsl.RUN_UNIT_TEST
 import alistar.sample.githubusers.libraries.test.dsl.THEN
 import alistar.sample.githubusers.libraries.test.dsl.WHEN
-import junit.framework.TestCase
+import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
-class UserDetailEntityMapperTest : TestCase() {
+class UserDetailEntityMapperTest {
 
     private val robot = Robot()
 
     @Test
-    fun test_mapToDomain() {
-        RUN_UNIT_TEST(robot) {
-            GIVEN {
-                repoUserDetail = RepoUserDetail(
-                    username = "ali-star",
-                    name = "Ali Mohseni Rad",
-                    photoUrl = "photoUrl",
-                    followingCount = 10,
-                    followersCount = 15,
-                    company = "organization",
-                    location = "Amsterdam, Netherlands",
-                    twitterUsername = "@ali-star",
-                    blog = "alimohsenirad.ir"
-                )
-            }
-            AND {
-                userDetailEntity = UserDetailEntity(
-                    login = "ali-star",
-                    name = "Ali Mohseni Rad",
-                    avatar = "photoUrl",
-                    gravatar = "",
-                    following = 10,
-                    followers = 15,
-                    company = "organization",
-                    location = "Amsterdam, Netherlands",
-                    twitterUsername = "@ali-star",
-                    blog = "alimohsenirad.ir"
-                )
-            }
-            WHEN { mapToDomain() }
-            THEN { checkRepoUserDetailMappedSuccessfully() }
+    fun test_mapToDomain() = RUN_UNIT_TEST(robot) {
+        GIVEN {
+            repoUserDetail = RepoUserDetail(
+                username = "ali-star",
+                name = "Ali Mohseni Rad",
+                photoUrl = "photoUrl",
+                followingCount = 10,
+                followersCount = 15,
+                company = "organization",
+                location = "Amsterdam, Netherlands",
+                twitterUsername = "@ali-star",
+                blog = "alimohsenirad.ir"
+            )
         }
+        AND {
+            userDetailEntity = UserDetailEntity(
+                login = "ali-star",
+                name = "Ali Mohseni Rad",
+                avatar = "photoUrl",
+                gravatar = "",
+                following = 10,
+                followers = 15,
+                company = "organization",
+                location = "Amsterdam, Netherlands",
+                twitterUsername = "@ali-star",
+                blog = "alimohsenirad.ir"
+            )
+        }
+        WHEN { mapToDomain() }
+        THEN { checkRepoUserDetailMappedSuccessfully() }
     }
 
     private class Robot : BaseRobot() {

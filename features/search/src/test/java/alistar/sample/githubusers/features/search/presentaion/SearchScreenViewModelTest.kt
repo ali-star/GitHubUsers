@@ -13,39 +13,40 @@ import androidx.paging.PagingData
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.setMain
+import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
-class SearchScreenViewModelTest : TestCase() {
+class SearchScreenViewModelTest {
 
+    private val testDispatcher = StandardTestDispatcher()
     private val robot = Robot()
 
-    @Test
-    fun test_onInputTextChanged() {
-        RUN_UNIT_TEST(robot) {
-            GIVEN { mockSearchUsersUseCase() }
-            WHEN { createViewModel() }
-            AND { search("octocat") }
-            THEN { checkSearchUserIsCalled(times = 0, timeout = 0) }
-            AND { checkSearchUserIsCalled(times = 1, timeout = 1000) }
-        }
+    @Before
+    fun setup() {
+        Dispatchers.setMain(testDispatcher)
     }
 
     @Test
-    fun test_continuous_onInputTextChanged() {
-        RUN_UNIT_TEST(robot) {
-            GIVEN { mockSearchUsersUseCase() }
-            WHEN { createViewModel() }
-            AND { search("octo") }
-            AND { search("octocat") }
-            AND { checkSearchUserIsCalled(times = 1, timeout = 1000) }
-        }
+    fun test_onInputTextChanged() = RUN_UNIT_TEST(robot) {
+        GIVEN { mockSearchUsersUseCase() }
+        WHEN { createViewModel() }
+        AND { search("octocat") }
+        THEN { checkSearchUserIsCalled(times = 0, timeout = 0) }
+        AND { checkSearchUserIsCalled(times = 1, timeout = 1000) }
+    }
+
+    @Test
+    fun test_continuous_onInputTextChanged() = RUN_UNIT_TEST(robot) {
+        GIVEN { mockSearchUsersUseCase() }
+        WHEN { createViewModel() }
+        AND { search("octo") }
+        AND { search("octocat") }
+        AND { checkSearchUserIsCalled(times = 1, timeout = 1000) }
     }
 
     private class Robot : BaseRobot() {

@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalLayoutApi::class)
-
 package alistar.sample.githubusers.features.userdetail.presentation
 
 import alistar.sample.githubusers.feature.userdetail.R
@@ -17,10 +15,8 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.consumedWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -102,7 +98,6 @@ internal fun UserDetailScaffold(
             Box(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .consumedWindowInsets(innerPadding)
                     .fillMaxSize()
                     .verticalScroll(state = rememberScrollState())
                     .padding(vertical = 36.dp)

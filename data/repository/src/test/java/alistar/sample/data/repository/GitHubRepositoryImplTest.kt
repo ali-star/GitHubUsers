@@ -11,18 +11,16 @@ import alistar.sample.githubusers.libraries.test.dsl.WHEN
 import alistar.sample.githubusers.libraries.test.exception.TestException
 import io.mockk.coEvery
 import io.mockk.mockk
-import junit.framework.TestCase
-import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.runBlocking
+import junit.framework.TestCase.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestDispatcher
 
-@RunWith(RobolectricTestRunner::class)
-class GitHubRepositoryImplTest : TestCase() {
+class GitHubRepositoryImplTest {
 
-    private val robot = Robot()
+    private val testDispatcher = StandardTestDispatcher()
+    private val robot = Robot(testDispatcher)
 
     @Before
     fun setup() {
@@ -30,70 +28,67 @@ class GitHubRepositoryImplTest : TestCase() {
     }
 
     @Test
-    fun test_successful_getUserDetail() {
-        RUN_UNIT_TEST(robot) {
-            GIVEN { mockSuccessfulGetUserDetail() }
-            WHEN { callGetUserDetail() }
-            THEN { checkUserDetailSuccessfulResult() }
-        }
+    fun test_successful_getUserDetail() = RUN_UNIT_TEST(robot, testDispatcher) {
+        GIVEN { mockSuccessfulGetUserDetail() }
+        WHEN { callGetUserDetail() }
+        THEN { checkUserDetailSuccessfulResult() }
     }
 
     @Test
-    fun test_failure_getUserDetail() {
-        RUN_UNIT_TEST(robot) {
-            GIVEN { mockFailureGetUserDetail() }
-            WHEN { callGetUserDetail() }
-            THEN { checkUserDetailFailureResult() }
-        }
-    }
-
-    private class Robot : BaseRobot() {
-
-        private val gitHubDataSource: GitHubDataSource = mockk()
-        private val gitHubRepository = GitHubRepositoryImpl(gitHubDataSource)
-        private lateinit var getUserDetailResultList: List<UserDetail>
-        private var testExceptionThrown = false
-
-        override fun setup() {
-            super.setup()
-            testExceptionThrown = false
-        }
-
-        fun mockSuccessfulGetUserDetail() {
-            coEvery { gitHubDataSource.getUserDetail(any()) } answers {
-                RepoUserDetail(
-                    username = "ali-star",
-                    name = "Ali Mohseni Rad",
-                    photoUrl = "photoUrl",
-                    followersCount = 10,
-                    followingCount = 10,
-                    company = "organization",
-                    location = "Amsterdam, Netherlands",
-                    twitterUsername = "@ali-star",
-                    blog = "alimohsenirad.ir",
-                )
-            }
-        }
-
-        fun mockFailureGetUserDetail() {
-            coEvery { gitHubDataSource.getUserDetail(any()) } throws TestException
-        }
-
-        fun callGetUserDetail() = runBlocking {
-            try {
-                getUserDetailResultList = gitHubRepository.getUserDetail("ali-star").toList()
-            } catch (ignored: TestException) {
-                testExceptionThrown = true
-            }
-        }
-
-        fun checkUserDetailSuccessfulResult() {
-            assertEquals(1, getUserDetailResultList.size)
-            assertTrue(!testExceptionThrown)
-        }
-
-        fun checkUserDetailFailureResult() {
-            assertTrue(testExceptionThrown)
-        }
+    fun test_failure_getUserDetail() = RUN_UNIT_TEST(robot, testDispatcher) {
+        GIVEN { mockFailureGetUserDetail() }
+        WHEN { callGetUserDetail() }
+        THEN { checkUserDetailFailureResult() }
     }
 }
+
+private class Robot(testDispatcher: TestDispatcher) : BaseRobot() {
+
+    private val gitHubDataSource: GitHubDataSource = mockk()
+    private val gitHubRepository = GitHubRepositoryImpl(gitHubDataSource, testDispatcher)
+    private var getUserDetailResult: UserDetail? = null
+    private var testExceptionThrown = false
+
+    override fun setup() {
+        super.setup()
+        testExceptionThrown = false
+    }
+
+    fun mockSuccessfulGetUserDetail() {
+        coEvery { gitHubDataSource.getUserDetail(any()) } answers {
+            RepoUserDetail(
+                username = "ali-star",
+                name = "Ali Mohseni Rad",
+                photoUrl = "photoUrl",
+                followersCount = 10,
+                followingCount = 10,
+                company = "organization",
+                location = "Amsterdam, Netherlands",
+                twitterUsername = "@ali-star",
+                blog = "alimohsenirad.ir",
+            )
+        }
+    }
+
+    fun mockFailureGetUserDetail() {
+        coEvery { gitHubDataSource.getUserDetail(any()) } throws TestException
+    }
+
+    suspend fun callGetUserDetail() {
+        try {
+            getUserDetailResult = gitHubRepository.getUserDetail("ali-star")
+        } catch (ignored: TestException) {
+            testExceptionThrown = true
+        }
+    }
+
+    fun checkUserDetailSuccessfulResult() {
+        assertTrue(getUserDetailResult != null)
+        assertTrue(!testExceptionThrown)
+    }
+
+    fun checkUserDetailFailureResult() {
+        assertTrue(testExceptionThrown)
+    }
+}
+

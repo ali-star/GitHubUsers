@@ -1,6 +1,10 @@
 package alistar.sample.githubusers.libraries.test.dsl
 
 import alistar.sample.githubusers.libraries.test.BaseRobot
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestDispatcher
+import kotlinx.coroutines.test.TestResult
+import kotlinx.coroutines.test.runTest
 import java.util.concurrent.TimeUnit
 
 /**
@@ -13,8 +17,9 @@ import java.util.concurrent.TimeUnit
 @Suppress("FunctionName")
 fun <T : BaseRobot> RUN_UNIT_TEST(
     robot: T,
-    block: TestRun<T>.() -> Unit
-): TestRun<T> {
+    testDispatcher: TestDispatcher = StandardTestDispatcher(),
+    block: suspend TestRun<T>.() -> Unit
+): TestResult = runTest(testDispatcher) {
     val startTime = System.nanoTime()
 
     println("*** UNIT TEST start ***")
@@ -26,6 +31,4 @@ fun <T : BaseRobot> RUN_UNIT_TEST(
 
     println("*** time -> ${TimeUnit.NANOSECONDS.toMillis(difference)} ms ***")
     println("-------------------------------------------------------------------------------------")
-
-    return testRun
 }
