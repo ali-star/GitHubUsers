@@ -2,7 +2,6 @@ package alistar.sample.githubusers.features.searchapi.mapper
 
 import alistar.sample.githubusers.domain.model.User
 import alistar.sample.githubusers.features.searchapi.model.UserItem
-import alistar.sample.githubusers.features.searchapi.model.toView
 import alistar.sample.githubusers.libraries.test.BaseRobot
 import alistar.sample.githubusers.libraries.test.dsl.AND
 import alistar.sample.githubusers.libraries.test.dsl.GIVEN

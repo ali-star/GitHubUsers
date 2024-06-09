@@ -2,7 +2,7 @@ package alistar.sample.githubusers.features.searchapi.usecase
 
 import alistar.sample.githubusers.domain.interactor.SearchUsersInteractor
 import alistar.sample.githubusers.features.searchapi.model.UserItem
-import alistar.sample.githubusers.features.searchapi.model.toView
+import alistar.sample.githubusers.features.searchapi.mapper.toView
 import androidx.paging.PagingData
 import androidx.paging.map
 import kotlinx.coroutines.flow.Flow
