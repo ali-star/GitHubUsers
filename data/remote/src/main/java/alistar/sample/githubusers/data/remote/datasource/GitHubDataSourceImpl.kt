@@ -12,6 +12,11 @@ class GitHubDataSourceImpl(private val apis: Apis) : GitHubDataSource {
     override fun searchUsers(query: String): PagingSource<Int, RepoUser> =
         UsersPagingSource(apis = apis, query = query)
 
+    override suspend fun search(query: String, page: Int): List<RepoUser> {
+        val users = apis.search(query, 0, page)
+        return users.items.map { it.toRepo() }
+    }
+
     override suspend fun getUserDetail(username: String): RepoUserDetail =
         apis.userDetail(username).toRepo()
 }

@@ -15,4 +15,7 @@ class SearchUsersUseCase @Inject constructor(
 
     operator fun invoke(query: String): Flow<PagingData<UserItem>> =
         searchUsersInteractor(query).map { data -> data.map { it.toView() } }
+
+    suspend fun getUsers(query: String, page: Int): List<UserItem> =
+        searchUsersInteractor.getUsers(query, page).map { it.toView() }
 }

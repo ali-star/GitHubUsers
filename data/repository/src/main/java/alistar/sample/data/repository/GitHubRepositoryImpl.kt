@@ -26,6 +26,9 @@ class GitHubRepositoryImpl(
             pagingSourceFactory = { gitHubDataSource.searchUsers(query) }
         ).flow.map { data -> data.map { it.toDomain() } }
 
+    override suspend fun search(query: String, page: Int): List<User> =
+        gitHubDataSource.search(query, page).map { it.toDomain() }
+
     override suspend fun getUserDetail(username: String): UserDetail = withContext(dispatcher) {
         val userDetail = gitHubDataSource.getUserDetail(username)
         userDetail.toDomain()

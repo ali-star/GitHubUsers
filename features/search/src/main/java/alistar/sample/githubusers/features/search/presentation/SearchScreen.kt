@@ -90,7 +90,10 @@ private fun SearchScreenLoader(
         onInputTextChanged = searchScreenViewModel::onInputTextChanged,
         focusSearchBar = searchScreenViewModel::updateSearchBarState,
         resetToInitialState = searchScreenViewModel::resetToInitialState,
-        openUserDetail = navigateToUserDetail
+        openUserDetail = navigateToUserDetail,
+        getUsers = {
+            searchScreenViewModel.searchUsers(it)
+        }
     )
     SearchScreenScaffold(viewState = viewState, actions = actions)
 }
@@ -98,15 +101,14 @@ private fun SearchScreenLoader(
 @Composable
 internal fun SearchScreenScaffold(viewState: SearchScreenViewState, actions: SearchScreenActions) {
     Scaffold { innerPadding ->
-        val lazyPagingItems = viewState.pagingData?.collectAsLazyPagingItems()
+        val users by viewState.users.collectAsState()
         MainContent(
             modifier = Modifier.padding(innerPadding),
             inputText = viewState.inputText,
-            lazyPagingItems = lazyPagingItems,
+            items = users,
             actions = actions,
             isSearchBarHasFocus = viewState.isSearchBarFocused
         )
-        SnackbarHost(lazyPagingItems)
     }
     if (viewState.lastSearchedQuery.isNotEmpty()) {
         BackHandler {
@@ -119,39 +121,22 @@ internal fun SearchScreenScaffold(viewState: SearchScreenViewState, actions: Sea
 private fun MainContent(
     modifier: Modifier = Modifier,
     inputText: String,
-    lazyPagingItems: LazyPagingItems<UserItem>?,
+    items: List<UserItem>,
     actions: SearchScreenActions,
     isSearchBarHasFocus: Boolean
 ) {
     val searchBarHeight = 54.dp
     val searchBarHeightWithPadding = searchBarHeight + 16.dp
-    val refreshLoadState = lazyPagingItems?.loadState?.refresh
 
-    if (lazyPagingItems == null) {
-        InitialState(
-            modifier = modifier,
-            startSearch = { actions.focusSearchBar(true) },
-        )
-    } else if (refreshLoadState is LoadState.Loading) {
-        UserListLoadingState(modifier = modifier.padding(top = searchBarHeightWithPadding))
-    } else if (refreshLoadState is LoadState.Error) {
-        ErrorState(
-            modifier = modifier,
-            onRetry = { lazyPagingItems.retry() },
-        )
-    } else if (lazyPagingItems.loadState.append.endOfPaginationReached && lazyPagingItems.itemCount == 0) {
-        NoUsersFoundState(modifier = modifier)
-    } else {
-        val lazyListState = rememberLazyListState()
-        KeyboardManager(lazyListState)
-        UsersList(
-            modifier = modifier,
-            lazyListState = lazyListState,
-            contentPadding = PaddingValues(top = searchBarHeightWithPadding, bottom = 70.dp),
-            items = lazyPagingItems,
-            actions = actions
-        )
-    }
+    val lazyListState = rememberLazyListState()
+    KeyboardManager(lazyListState)
+    UsersList(
+        modifier = modifier,
+        lazyListState = lazyListState,
+        contentPadding = PaddingValues(top = searchBarHeightWithPadding, bottom = 70.dp),
+        items = items,
+        actions = actions
+    )
 
     SearchBar(
         modifier = modifier
@@ -164,7 +149,6 @@ private fun MainContent(
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun KeyboardManager(lazyListState: LazyListState) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -307,7 +291,7 @@ private fun UsersList(
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(),
     lazyListState: LazyListState = rememberLazyListState(),
-    items: LazyPagingItems<UserItem>,
+    items: List<UserItem>,
     actions: SearchScreenActions
 ) {
     Box(modifier = modifier.fillMaxSize()) {
@@ -316,37 +300,33 @@ private fun UsersList(
             state = lazyListState,
             contentPadding = contentPadding
         ) {
-            items(items.itemCount) { index ->
+            items(items.size) { index ->
                 val item = items[index]
-                if (item == null) {
-                    UserPlaceHolder()
-                } else {
-                    Row(
+                Row(
+                    modifier = Modifier
+                        .clickable { actions.openUserDetail(item.username) }
+                        .padding(vertical = 16.dp, horizontal = 16.dp)
+                        .fillMaxWidth()
+                        .height(48.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Image(
                         modifier = Modifier
-                            .clickable { actions.openUserDetail(item.username) }
-                            .padding(vertical = 16.dp, horizontal = 16.dp)
-                            .fillMaxWidth()
-                            .height(48.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            modifier = Modifier
-                                .size(48.dp)
-                                .clip(shape = CircleShape)
-                                .background(color = PlaceHolderColor),
-                            painter = rememberImagePainter(data = item.photoUrl),
-                            contentScale = ContentScale.Crop,
-                            contentDescription = "userPhoto"
-                        )
-                        Text(
-                            modifier = Modifier
-                                .padding(horizontal = 16.dp)
-                                .fillMaxWidth(),
-                            text = item.username,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
+                            .size(48.dp)
+                            .clip(shape = CircleShape)
+                            .background(color = PlaceHolderColor),
+                        painter = rememberImagePainter(data = item.photoUrl),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = "userPhoto"
+                    )
+                    Text(
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .fillMaxWidth(),
+                        text = item.username,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
                 }
             }
         }

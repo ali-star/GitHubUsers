@@ -23,7 +23,8 @@ class SearchScreenViewModel @Inject constructor(
     private val searchUseCase: SearchUsersUseCase
 ) : SearchViewModel() {
 
-    private val viewModelState = MutableStateFlow(SearchScreenViewState())
+    private val usersState = MutableStateFlow<List<UserItem>>(emptyList())
+    private val viewModelState = MutableStateFlow(SearchScreenViewState(users = usersState))
     val uiState = viewModelState.stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
@@ -38,7 +39,7 @@ class SearchScreenViewModel @Inject constructor(
         viewModelState.update {
             it.copy(inputText = text)
         }
-        search(text)
+        searchUsers(text)
     }
 
     override fun search(query: String) {
@@ -63,6 +64,30 @@ class SearchScreenViewModel @Inject constructor(
 
     private fun getPagingDataFlow(searchQuery: String): Flow<PagingData<UserItem>> =
         searchUseCase(searchQuery).cachedIn(viewModelScope)
+
+    private var page = 0
+    
+    fun searchUsers(query: String) {
+        searchDebouncerJob.cancel()
+        currentQuery = query
+
+        if (query.isNotEmpty()) {
+            searchDebouncerJob = viewModelScope.launch(ioDispatcher) {
+                delay(timeMillis = 700)
+                page++
+                val users = searchUseCase.getUsers(query, page)
+                viewModelState.update { state ->
+                    usersState.update { it + users }
+                    state.copy(lastSearchedQuery = query)
+                }
+            }
+        } else {
+            viewModelState.update { state ->
+                usersState.update { emptyList() }
+                state.copy(lastSearchedQuery = "")
+            }
+        }
+    }
 
     fun updateSearchBarState(isFocused: Boolean) {
         viewModelState.update {
