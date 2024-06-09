@@ -42,7 +42,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowForward
+import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -50,7 +50,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ColorFilter
@@ -66,7 +65,7 @@ import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import alistar.sample.githubusers.libraries.design.R as DesignResource
 
 @Composable
@@ -164,7 +163,6 @@ private fun MainContent(
     )
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun KeyboardManager(lazyListState: LazyListState) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -274,7 +272,7 @@ private fun InitialState(
             Text(text = stringResource(R.string.startSearch), color = HintColor)
             Icon(
                 modifier = Modifier.padding(start = 8.dp),
-                imageVector = Icons.Rounded.ArrowForward,
+                imageVector = Icons.AutoMirrored.Rounded.ArrowForward,
                 tint = HintColor,
                 contentDescription = "arrowIcon"
             )
@@ -334,7 +332,7 @@ private fun UsersList(
                                 .size(48.dp)
                                 .clip(shape = CircleShape)
                                 .background(color = PlaceHolderColor),
-                            painter = rememberImagePainter(data = item.photoUrl),
+                            painter = rememberAsyncImagePainter(model = item.photoUrl),
                             contentScale = ContentScale.Crop,
                             contentDescription = "userPhoto"
                         )
