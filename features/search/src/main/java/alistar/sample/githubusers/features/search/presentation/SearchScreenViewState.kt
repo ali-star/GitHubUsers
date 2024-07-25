@@ -8,5 +8,5 @@ data class SearchScreenViewState(
     val inputText: String = "",
     val lastSearchedQuery: String = "",
     val pagingData: Flow<PagingData<UserItem>>? = null,
-    val isSearchBarFocused: Boolean = false
+    val isInSearchState: Boolean = false
 )

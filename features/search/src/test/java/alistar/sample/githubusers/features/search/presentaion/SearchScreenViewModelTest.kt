@@ -32,7 +32,7 @@ class SearchScreenViewModelTest {
     }
 
     @Test
-    fun test_onInputTextChanged() = RUN_UNIT_TEST(robot) {
+    fun test_onSearchQueryChanged() = RUN_UNIT_TEST(robot) {
         GIVEN { mockSearchUsersUseCase() }
         WHEN { createViewModel() }
         AND { search("octocat") }
@@ -41,7 +41,7 @@ class SearchScreenViewModelTest {
     }
 
     @Test
-    fun test_continuous_onInputTextChanged() = RUN_UNIT_TEST(robot) {
+    fun test_continuous_onSearchQueryChanged() = RUN_UNIT_TEST(robot) {
         GIVEN { mockSearchUsersUseCase() }
         WHEN { createViewModel() }
         AND { search("octo") }
@@ -72,7 +72,7 @@ class SearchScreenViewModelTest {
         }
 
         fun search(text: String) {
-            viewModel.onInputTextChanged(text)
+            viewModel.onSearchQueryChanged(text)
         }
 
         fun checkSearchUserIsCalled(times: Int = 1, timeout: Long = 1000) {

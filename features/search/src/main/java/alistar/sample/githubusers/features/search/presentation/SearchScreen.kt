@@ -86,8 +86,8 @@ private fun SearchScreenLoader(
 ) {
     val viewState by searchScreenViewModel.uiState.collectAsState()
     val actions = SearchScreenActions(
-        onInputTextChanged = searchScreenViewModel::onInputTextChanged,
-        focusSearchBar = searchScreenViewModel::updateSearchBarState,
+        onInputTextChanged = searchScreenViewModel::onSearchQueryChanged,
+        focusSearchBar = searchScreenViewModel::setSearchState,
         resetToInitialState = searchScreenViewModel::resetToInitialState,
         openUserDetail = navigateToUserDetail
     )
@@ -103,7 +103,7 @@ internal fun SearchScreenScaffold(viewState: SearchScreenViewState, actions: Sea
             inputText = viewState.inputText,
             lazyPagingItems = lazyPagingItems,
             actions = actions,
-            isSearchBarHasFocus = viewState.isSearchBarFocused
+            isSearchBarHasFocus = viewState.isInSearchState
         )
         SnackbarHost(lazyPagingItems)
     }

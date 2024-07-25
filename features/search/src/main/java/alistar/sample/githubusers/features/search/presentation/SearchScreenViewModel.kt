@@ -34,7 +34,7 @@ class SearchScreenViewModel @Inject constructor(
     private var currentQuery = ""
     private val ioDispatcher = Dispatchers.IO
 
-    fun onInputTextChanged(text: String) {
+    fun onSearchQueryChanged(text: String) {
         viewModelState.update {
             it.copy(inputText = text)
         }
@@ -64,9 +64,9 @@ class SearchScreenViewModel @Inject constructor(
     private fun getPagingDataFlow(searchQuery: String): Flow<PagingData<UserItem>> =
         searchUseCase(searchQuery).cachedIn(viewModelScope)
 
-    fun updateSearchBarState(isFocused: Boolean) {
+    fun setSearchState(isInSearchState: Boolean) {
         viewModelState.update {
-            it.copy(isSearchBarFocused = isFocused)
+            it.copy(isInSearchState = isInSearchState)
         }
     }
 
@@ -76,7 +76,7 @@ class SearchScreenViewModel @Inject constructor(
                 inputText = "",
                 lastSearchedQuery = "",
                 pagingData = null,
-                isSearchBarFocused = false
+                isInSearchState = false
             )
         }
     }
